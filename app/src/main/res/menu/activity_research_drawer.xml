@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <item android:title="Abstracts"></item>
+        <menu>
+            <item
+                android:id="@+id/poster_abstracts"
+                android:icon="@drawable/ic_poster_black_24dp"
+                android:textSize="48sp"
+                android:title="Poster Abstracts" />
+            <item
+                android:id="@+id/presentation_abstracts"
+                android:icon="@drawable/ic_presentation_black_24dp"
+                android:title="Presentation Abstracts" />
+
+        </menu>
+    </group>
+
+    <group>
+        <item android:title="Scores"></item>
+        <menu>
+            <item
+                android:id="@+id/poster_scores"
+                android:icon="@drawable/ic_poster_black_24dp"
+                android:title="Poster Scores" />
+            <item
+                android:id="@+id/presentation_scores"
+                android:icon="@drawable/ic_presentation_black_24dp"
+                android:title="Presentation Scores" />
+
+        </menu>
+    </group>
+</menu>
