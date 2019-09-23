@@ -1,5 +1,6 @@
 package edu.aku.hassannaqvi.researchdayscoring.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -39,16 +40,18 @@ public class ResearchActivity extends AppCompatActivity {
                 int id = item.getItemId();
                 switch (id) {
                     case R.id.poster_abstracts:
-                        Toast.makeText(ResearchActivity.this, "Poster Abstracts", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ResearchActivity.this, "Presentation Abstracts", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.presentation_abstracts:
                         Toast.makeText(ResearchActivity.this, "Presentation Abstracts", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.poster_scores:
-                        Toast.makeText(ResearchActivity.this, "Poster Scores", Toast.LENGTH_SHORT).show();
+
+                        startActivity(new Intent(ResearchActivity.this, PosterScoring.class));
                         break;
                     case R.id.presentation_scores:
-                        Toast.makeText(ResearchActivity.this, "Presentation Scores", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(ResearchActivity.this, OralPresentationScoring.class));
+
                         break;
                     default:
                         return true;

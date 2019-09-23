@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="presentation_section">
+        <item>Content</item>
+        <item>Quality Of Research</item>
+        <item>Delivery</item>
+    </string-array>
+    <string-array name="poster_content">
+        <item>Layout/Design </item>
+        <item>Appropriate use of colors, space and graphics    </item>
+        <item>Relevance</item>
+        <item>The content is relevant to the theme</item>
+        <item>Quality of content</item>
+        <item>Easy to read, captured the idea/topic of the poster</item>
+        <item>Abstract </item>
+        <item>Strongly represent the research question and contained important points
+Includes balanced summary of what was done and what was found
+ </item>
+        <item>Methodology</item>
+        <item>Research methods are very well designed and appropriate to research question. Appropriate statistical methods are applied. </item>
+        <item>Results/Conclusion</item>
+        <item>Matches with research question/objective being asked</item>
+        <item>Organization</item>
+        <item>Poster has a logical, intuitive sequence of information. Important information is readily available and easy to grasp</item>
+        <item>Comment</item>
+        <item>Comment</item>
+    </string-array>
+
+    <string-array name="presentation_content">
+        <item>Project Overview (Purpose Of Goal)</item>
+        <item>Relevance and Significance of project (to field of study, community, etc.)</item>
+        <item>Background defines the importance of research </item>
+        <item>Methods showing rigor,  are effectively planned and executed </item>
+        <item>Smooth transitions and Logical flow between slides/ sections  </item>
+        <item>Main points supported with details and Documented facts where necessary </item>
+        <item>Comprehension and knowledge of subject area   </item>
+        <item>Appropriate use of media  </item>
+        <item>Professional and confident  </item>
+        <item>Engaged with audience/ eye contact </item>
+        <item>Clear voice with good pace / command on language  </item>
+        <item>Response to questions (if any) </item>
+        <item>Effective use of time  / In time limit </item>
+        <item>Comments: (If any) </item>
+        <item> </item>
+        <item></item>
+        <item> </item>
+    </string-array>
+
+
+</resources>

@@ -25,13 +25,15 @@
         <activity android:name=".ui.EndingActivity" />
         <activity
             android:name=".ui.ResearchActivity"
-            android:label="@string/title_activity_research" />
-        <activity android:name=".MainActivity">
+            android:label="@string/title_activity_research" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity">
+
         </activity>
     </application>
 
