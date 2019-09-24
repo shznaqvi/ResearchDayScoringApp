@@ -14,6 +14,16 @@ public class ProjectsContract {
 
     private static final String TAG = "PROJECTS_CONTRACT";
     private String id;
+
+    public String getProj_id() {
+        return proj_id;
+    }
+
+    public void setProj_id(String proj_id) {
+        this.proj_id = proj_id;
+    }
+
+    private String proj_id;
     private String author;
     private String theme;
     private String title;
@@ -73,6 +83,7 @@ public class ProjectsContract {
 
     public ProjectsContract Sync(JSONObject jsonObject) throws JSONException {
         this.author = jsonObject.getString(ProjectsTable.COLUMN_AUTHOR);
+        this.proj_id = jsonObject.getString(ProjectsTable.COLUMN_PROJECT_ID);
         this.theme = jsonObject.getString(ProjectsTable.COLUMN_THEME);
         this.title = jsonObject.getString(ProjectsTable.COLUMN_TITLE);
         this.abstracts = jsonObject.getString(ProjectsTable.COLUMN_ABSTRACTS);
@@ -82,7 +93,7 @@ public class ProjectsContract {
     }
 
     public ProjectsContract Hydrate(Cursor cursor) {
-        this.id = cursor.getString(cursor.getColumnIndex(ProjectsTable._ID));
+        this.proj_id = cursor.getString(cursor.getColumnIndex(ProjectsTable.COLUMN_PROJECT_ID));
         this.author = cursor.getString(cursor.getColumnIndex(ProjectsTable.COLUMN_AUTHOR));
         this.theme = cursor.getString(cursor.getColumnIndex(ProjectsTable.COLUMN_THEME));
         this.title = cursor.getString(cursor.getColumnIndex(ProjectsTable.COLUMN_TITLE));
@@ -97,6 +108,7 @@ public class ProjectsContract {
 
         JSONObject json = new JSONObject();
         json.put(ProjectsTable._ID, this.id == null ? JSONObject.NULL : this.id);
+        json.put(ProjectsTable.COLUMN_PROJECT_ID, this.proj_id == null ? JSONObject.NULL : this.proj_id);
         json.put(ProjectsTable.COLUMN_AUTHOR, this.author == null ? JSONObject.NULL : this.author);
         json.put(ProjectsTable.COLUMN_THEME, this.theme == null ? JSONObject.NULL : this.theme);
         json.put(ProjectsTable.COLUMN_TITLE, this.title == null ? JSONObject.NULL : this.title);
@@ -109,13 +121,12 @@ public class ProjectsContract {
 
         public static final String TABLE_NAME = "users";
         public static final String _ID = "id";
-        public static final String COLUMN_AUTHOR = "author";
-        public static final String COLUMN_THEME = "theme";
-        public static final String COLUMN_TITLE = "title";
-        public static final String COLUMN_ABSTRACTS = "abstracts";
-        public static final String COLUMN_TYPE = "type";
-
-
+        public static final String COLUMN_PROJECT_ID = "proj_id";
+        public static final String COLUMN_AUTHOR = "proj_author";
+        public static final String COLUMN_THEME = "proj_theme";
+        public static final String COLUMN_TITLE = "proj_title";
+        public static final String COLUMN_ABSTRACTS = "proj_abstract";
+        public static final String COLUMN_TYPE = "proj_type";
         public static final String _URI = "projects.php";
 
     }

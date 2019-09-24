@@ -23,8 +23,12 @@ public class ResearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_research);
 
+
+        this.setTitle("Welcome To Annual Research Day!");
         dl = findViewById(R.id.activity_research);
         t = new ActionBarDrawerToggle(this, dl, R.string.Open, R.string.Close);
+
+
 
         dl.addDrawerListener(t);
         t.syncState();

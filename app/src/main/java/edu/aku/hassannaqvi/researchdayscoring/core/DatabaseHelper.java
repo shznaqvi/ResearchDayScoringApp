@@ -9,6 +9,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,6 +19,8 @@ import java.util.Date;
 
 import edu.aku.hassannaqvi.researchdayscoring.contracts.FormsContract;
 import edu.aku.hassannaqvi.researchdayscoring.contracts.FormsContract.FormsTable;
+import edu.aku.hassannaqvi.researchdayscoring.contracts.ProjectsContract;
+import edu.aku.hassannaqvi.researchdayscoring.contracts.ProjectsContract.ProjectsTable;
 import edu.aku.hassannaqvi.researchdayscoring.contracts.UsersContract;
 import edu.aku.hassannaqvi.researchdayscoring.contracts.UsersContract.UsersTable;
 
@@ -26,59 +31,76 @@ import edu.aku.hassannaqvi.researchdayscoring.contracts.UsersContract.UsersTable
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    public static final String SQL_CREATE_USERS = "CREATE TABLE " + UsersContract.UsersTable.TABLE_NAME + "("
+    public static final String DATABASE_NAME = "researchdayscoring.db";
+    public static final String DB_NAME = DATABASE_NAME.replace(".", "_copy.");
+    public static final String PROJECT_NAME = "researchdayscoring";
+    private static final int DATABASE_VERSION = 1;
+
+    public static final String SQL_CREATE_USERS = "CREATE TABLE IF NOT EXISTS " + UsersTable.TABLE_NAME + "("
             + UsersTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + UsersTable.COLUMN_USERNAME + " TEXT,"
             + UsersTable.COLUMN_PASSWORD + " TEXT,"
-            + UsersTable.FULL_NAME + " TEXT"
+            + UsersTable.COLUMN_FULLNAME + " TEXT,"
+            + UsersTable.COLUMN_USER_ROLE + " TEXT,"
+            + UsersTable.COLUMN_USER_TYPE + " TEXT"
             + " );";
-    public static final String DATABASE_NAME = "researchdayscoring.db";
-    public static final String DB_NAME = DATABASE_NAME.replace(".", "_copy.");
-    public static final String PROJECT_NAME = "KMC-SCREENING";
-    private static final int DATABASE_VERSION = 7;
-    private static final String SQL_CREATE_FORMS = "CREATE TABLE "
-            + FormsTable.TABLE_NAME + "("
-            + FormsTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-            FormsTable.COLUMN_PROJECTNAME + " TEXT," +
-            FormsTable.COLUMN_DEVICEID + " TEXT," +
-            FormsTable.COLUMN_DEVICETAGID + " TEXT," +
-            FormsTable.COLUMN_APPVERSION + " TEXT," +
-            FormsTable.COLUMN_FORMTYPE + " TEXT," +
-            FormsTable.COLUMN_SURVEYTYPE + " TEXT," +
-            FormsTable.COLUMN_FORMDATE + " TEXT," +
-            FormsTable.COLUMN__UID + " TEXT," +
-            FormsTable.COLUMN_USER + " TEXT," +
-            FormsTable.COLUMN_GPSLAT + " TEXT," +
-            FormsTable.COLUMN_GPSLNG + " TEXT," +
-            FormsTable.COLUMN_GPSDT + " TEXT," +
-            FormsTable.COLUMN_GPSACC + " TEXT," +
-            FormsTable.COLUMN_GPSALTITUDE + " TEXT," +
-            FormsTable.COLUMN_PWID + " TEXT," +
-            FormsTable.COLUMN_SCREENID + " TEXT," +
-            FormsTable.COLUMN_TALUKA + " TEXT," +
-            FormsTable.COLUMN_UC + " TEXT," +
-            FormsTable.COLUMN_VILLAGE + " TEXT," +
-            FormsTable.COLUMN_SINFO + " TEXT," +
-            FormsTable.COLUMN_SA + " TEXT," +
-            FormsTable.COLUMN_SB + " TEXT," +
-            FormsTable.COLUMN_SC + " TEXT," +
-            FormsTable.COLUMN_SD + " TEXT," +
-            FormsTable.COLUMN_SE + " TEXT," +
-            FormsTable.COLUMN_SF + " TEXT," +
-            FormsTable.COLUMN_ENDINGDATETIME + " TEXT," +
-            FormsTable.COLUMN_ISTATUS + " TEXT," +
-            FormsTable.COLUMN_ISTATUS88X + " TEXT," +
-            FormsTable.COLUMN_SYNCED + " TEXT," +
-            FormsTable.COLUMN_SYNCED_DATE + " TEXT"
+    public static final String SQL_CREATE_PROJECTS = "CREATE TABLE IF NOT EXISTS " + ProjectsTable.TABLE_NAME + "("
+            + ProjectsTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + ProjectsTable.COLUMN_PROJECT_ID + " TEXT,"
+            + ProjectsTable.COLUMN_TITLE + " TEXT,"
+            + ProjectsTable.COLUMN_AUTHOR + " TEXT,"
+            + ProjectsTable.COLUMN_THEME + " TEXT,"
+            + ProjectsTable.COLUMN_TYPE + " TEXT,"
+            + ProjectsTable.COLUMN_ABSTRACTS + " TEXT"
             + " );";
 
-    private static final String SQL_ALTER_FORMS = "ALTER TABLE " +
-            FormsTable.TABLE_NAME + " ADD COLUMN " +
-            FormsTable.COLUMN_SCREENID + " TEXT;";
+
+//    private static final String SQL_CREATE_FORMS = "CREATE TABLE "
+//            + FormsTable.TABLE_NAME + "("
+//            + FormsTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+//            FormsTable.COLUMN_PROJECTNAME + " TEXT," +
+//            FormsTable.COLUMN_DEVICEID + " TEXT," +
+//            FormsTable.COLUMN_DEVICETAGID + " TEXT," +
+//            FormsTable.COLUMN_APPVERSION + " TEXT," +
+//            FormsTable.COLUMN_FORMTYPE + " TEXT," +
+//            FormsTable.COLUMN_SURVEYTYPE + " TEXT," +
+//            FormsTable.COLUMN_FORMDATE + " TEXT," +
+//            FormsTable.COLUMN__UID + " TEXT," +
+//            FormsTable.COLUMN_USER + " TEXT," +
+//            FormsTable.COLUMN_GPSLAT + " TEXT," +
+//            FormsTable.COLUMN_GPSLNG + " TEXT," +
+//            FormsTable.COLUMN_GPSDT + " TEXT," +
+//            FormsTable.COLUMN_GPSACC + " TEXT," +
+//            FormsTable.COLUMN_GPSALTITUDE + " TEXT," +
+//            FormsTable.COLUMN_PWID + " TEXT," +
+//            FormsTable.COLUMN_SCREENID + " TEXT," +
+//            FormsTable.COLUMN_TALUKA + " TEXT," +
+//            FormsTable.COLUMN_UC + " TEXT," +
+//            FormsTable.COLUMN_VILLAGE + " TEXT," +
+//            FormsTable.COLUMN_SINFO + " TEXT," +
+//            FormsTable.COLUMN_SA + " TEXT," +
+//            FormsTable.COLUMN_SB + " TEXT," +
+//            FormsTable.COLUMN_SC + " TEXT," +
+//            FormsTable.COLUMN_SD + " TEXT," +
+//            FormsTable.COLUMN_SE + " TEXT," +
+//            FormsTable.COLUMN_SF + " TEXT," +
+//            FormsTable.COLUMN_ENDINGDATETIME + " TEXT," +
+//            FormsTable.COLUMN_ISTATUS + " TEXT," +
+//            FormsTable.COLUMN_ISTATUS88X + " TEXT," +
+//            FormsTable.COLUMN_SYNCED + " TEXT," +
+//            FormsTable.COLUMN_SYNCED_DATE + " TEXT"
+//            + " );";
+//
+//    private static final String SQL_ALTER_FORMS = "ALTER TABLE " +
+//            FormsTable.TABLE_NAME + " ADD COLUMN " +
+//            FormsTable.COLUMN_SCREENID + " TEXT;";
 
 
-    private static final String SQL_DELETE_USERS = "DROP TABLE IF EXISTS " + UsersContract.UsersTable.TABLE_NAME;
+    //    private static final String SQL_DELETE_USERS = "DROP TABLE IF EXISTS " + UsersContract.UsersTable.TABLE_NAME;
+//    private static final String SQL_DELETE_USERS = "DROP TABLE IF EXISTS " + UsersContract.UsersTable.TABLE_NAME;
     private static final String SQL_DELETE_FORMS = "DROP TABLE IF EXISTS " + FormsTable.TABLE_NAME;
+    private static final String SQL_DELETE_USERS = "DROP TABLE IF EXISTS " + UsersTable.TABLE_NAME;
+    private static final String SQL_DELETE_PROJECTS = "DROP TABLE IF EXISTS " + ProjectsTable.TABLE_NAME;
 
     private final String TAG = "DatabaseHelper";
     public String spDateT = new SimpleDateFormat("dd-MM-yy").format(new Date().getTime());
@@ -91,7 +113,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         db.execSQL(SQL_CREATE_USERS);
-        db.execSQL(SQL_CREATE_FORMS);
+        db.execSQL(SQL_CREATE_PROJECTS);
+
 
     }
 
@@ -105,10 +128,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_DELETE_MWRA);
         db.execSQL(SQL_DELETE_MWRASCREENED);*/
 
-        switch (i) {
-            case 1:
-
-        }
+        db.execSQL(SQL_DELETE_USERS);
+        db.execSQL(SQL_DELETE_PROJECTS);
 
     }
 
@@ -508,6 +529,65 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             }
         }
         return allFC;
+    }
+
+    public void syncUser(JSONArray userlist) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(UsersTable.TABLE_NAME, null, null);
+        try {
+            JSONArray jsonArray = userlist;
+            for (int i = 0; i < jsonArray.length(); i++) {
+
+                JSONObject jsonObjectUser = jsonArray.getJSONObject(i);
+
+                UsersContract user = new UsersContract();
+                user.Sync(jsonObjectUser);
+                ContentValues values = new ContentValues();
+
+                values.put(UsersTable.COLUMN_USERNAME, user.getUserName());
+                values.put(UsersTable.COLUMN_PASSWORD, user.getPassword());
+                values.put(UsersTable.COLUMN_FULLNAME, user.getFullname());
+                values.put(UsersTable.COLUMN_USER_ROLE, user.getUserRole());
+                values.put(UsersTable.COLUMN_USER_TYPE, user.getUserType());
+                db.insert(UsersTable.TABLE_NAME, null, values);
+            }
+
+
+        } catch (Exception e) {
+            Log.d(TAG, "syncUser(e): " + e);
+        } finally {
+            db.close();
+        }
+    }
+
+    public void syncProjects(JSONArray projectsList) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(ProjectsTable.TABLE_NAME, null, null);
+        try {
+            JSONArray jsonArray = projectsList;
+            for (int i = 0; i < jsonArray.length(); i++) {
+
+                JSONObject jsonObjectUser = jsonArray.getJSONObject(i);
+
+                ProjectsContract proj = new ProjectsContract();
+                proj.Sync(jsonObjectUser);
+                ContentValues values = new ContentValues();
+
+                values.put(ProjectsTable.COLUMN_PROJECT_ID, proj.getProj_id());
+                values.put(ProjectsTable.COLUMN_ABSTRACTS, proj.getAbstract());
+                values.put(ProjectsTable.COLUMN_AUTHOR, proj.getAuthor());
+                values.put(ProjectsTable.COLUMN_THEME, proj.getTheme());
+                values.put(ProjectsTable.COLUMN_TITLE, proj.getTitle());
+                values.put(ProjectsTable.COLUMN_TYPE, proj.getType());
+                db.insert(ProjectsTable.TABLE_NAME, null, values);
+            }
+
+
+        } catch (Exception e) {
+            Log.d(TAG, "syncUser(e): " + e);
+        } finally {
+            db.close();
+        }
     }
 
     // ANDROID DATABASE MANAGER

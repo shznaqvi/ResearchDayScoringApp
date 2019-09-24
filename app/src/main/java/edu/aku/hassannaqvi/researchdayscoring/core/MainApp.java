@@ -34,7 +34,7 @@ public class MainApp extends Application {
     public static final String _IP = "43.245.131.159"; // Test PHP server
     public static final String _ALTERNATE_IP = "58.65.211.13"; // Test PHP server
     public static final Integer _PORT = 8080; // Port - with colon (:)
-    public static final String _HOST_URL_1 = "http://" + MainApp._IP + ":" + MainApp._PORT + "/kmc/api/";
+    public static final String _HOST_URL_1 = "http://" + MainApp._IP + ":" + MainApp._PORT + "/researchday/api/";
     public static final String _HOST_URL_2 = "http://" + MainApp._ALTERNATE_IP + ":" + MainApp._PORT + "/kmc/api/";
     public static final String _TEST_URL = "http://10.1.42.30/kmc/api/";
     public static final String[] HOST = new String[]{_HOST_URL_1, _HOST_URL_2/*,_TEST_URL*/};
