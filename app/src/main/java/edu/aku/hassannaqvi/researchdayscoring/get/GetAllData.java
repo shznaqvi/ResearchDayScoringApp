@@ -84,11 +84,8 @@ public class GetAllData extends AsyncTask<String, String, String> {
             case "users":
                 position = 0;
                 break;
-            case "villages":
+            case "projects":
                 position = 1;
-                break;
-            case "ucs":
-                position = 2;
                 break;
 
         }

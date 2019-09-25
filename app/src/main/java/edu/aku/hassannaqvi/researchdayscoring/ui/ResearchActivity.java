@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -29,7 +30,6 @@ public class ResearchActivity extends AppCompatActivity {
         t = new ActionBarDrawerToggle(this, dl, R.string.Open, R.string.Close);
 
 
-
         dl.addDrawerListener(t);
         t.syncState();
 
@@ -47,14 +47,15 @@ public class ResearchActivity extends AppCompatActivity {
                         Toast.makeText(ResearchActivity.this, "Presentation Abstracts", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.presentation_abstracts:
-                        Toast.makeText(ResearchActivity.this, "Presentation Abstracts", Toast.LENGTH_SHORT).show();
+//                        startActivity(new Intent(ResearchActivity.this, AndroidDatabaseManager.class));
                         break;
                     case R.id.poster_scores:
-
                         startActivity(new Intent(ResearchActivity.this, PosterScoring.class));
+                        dl.closeDrawer(GravityCompat.START);
                         break;
                     case R.id.presentation_scores:
                         startActivity(new Intent(ResearchActivity.this, OralPresentationScoring.class));
+                        dl.closeDrawer(GravityCompat.START);
 
                         break;
                     default:

@@ -3,7 +3,8 @@
     package="edu.aku.hassannaqvi.researchdayscoring">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -28,7 +29,7 @@
         <activity
             android:name=".ui.PosterScoring"
             android:label="@string/title_activity_poster_scoring" />
-        <activity android:name=".SyncActivity"/>
+        <activity android:name=".SyncActivity" />
 
         <activity
             android:name=".ui.OralPresentationScoring"
@@ -45,6 +46,8 @@
             android:name=".ui.ResearchActivity"
             android:label="@string/title_activity_research"></activity>
         <activity android:name=".MainActivity" />
+
+        <activity android:name=".core.AndroidDatabaseManager" />
     </application>
 
 </manifest>

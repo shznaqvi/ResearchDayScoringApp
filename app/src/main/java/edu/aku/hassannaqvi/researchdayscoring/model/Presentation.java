@@ -9,6 +9,7 @@ public class Presentation {
     public boolean isComment;
     public int position;
     public int score;
+    public int questionType = 1;
 
 
     public Presentation(boolean isSection, int position) {
@@ -29,10 +30,11 @@ public class Presentation {
         this.score = score;
     }
 
-    public Presentation(String presentationReview, boolean isSection, boolean isComment) {
+    public Presentation(String presentationReview, boolean isSection, boolean isComment, int questionType) {
         this.presentationReview = presentationReview;
         this.isSection = isSection;
         this.isComment = isComment;
+        this.questionType = questionType;
     }
 }
 

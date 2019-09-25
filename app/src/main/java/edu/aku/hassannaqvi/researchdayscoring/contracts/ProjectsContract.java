@@ -14,6 +14,12 @@ public class ProjectsContract {
 
     private static final String TAG = "PROJECTS_CONTRACT";
     private String id;
+    private String proj_id;
+    private String author;
+    private String theme;
+    private String title;
+    private String abstracts;
+    private String type;
 
     public String getProj_id() {
         return proj_id;
@@ -23,12 +29,7 @@ public class ProjectsContract {
         this.proj_id = proj_id;
     }
 
-    private String proj_id;
-    private String author;
-    private String theme;
-    private String title;
-    private String abstracts;
-    private String type;
+
 
     public ProjectsContract() {
     }
@@ -119,7 +120,7 @@ public class ProjectsContract {
 
     public static abstract class ProjectsTable implements BaseColumns {
 
-        public static final String TABLE_NAME = "users";
+        public static final String TABLE_NAME = "projects_table";
         public static final String _ID = "id";
         public static final String COLUMN_PROJECT_ID = "proj_id";
         public static final String COLUMN_AUTHOR = "proj_author";

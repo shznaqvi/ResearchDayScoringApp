@@ -8,6 +8,8 @@ import edu.aku.hassannaqvi.researchdayscoring.R;
 
 public class Data {
 
+    // 0 = comment question
+    // 1 = not comment question
 
     public static ArrayList<Presentation> getPresentationItems(Context context) {
 
@@ -20,19 +22,19 @@ public class Data {
         items.add(new Presentation(secHeading[2], true, 10));
         for (int j = 0; j < reviews.length; j++) {
             if (j == items.get(0).position) {
-                finalArray.add(new Presentation(items.get(0).sectionTitle, true, false));
+                finalArray.add(new Presentation(items.get(0).sectionTitle, true, false, 1));
                 continue;
             } else if (j == items.get(1).position) {
-                finalArray.add(new Presentation(items.get(1).sectionTitle, true, false));
+                finalArray.add(new Presentation(items.get(1).sectionTitle, true, false, 1));
                 continue;
             } else if (j == items.get(2).position) {
-                finalArray.add(new Presentation(items.get(2).sectionTitle, true, false));
+                finalArray.add(new Presentation(items.get(2).sectionTitle, true, false, 1));
                 continue;
             } else if (j == 14) {
-                finalArray.add(new Presentation(reviews[j - 1], false, true));
+                finalArray.add(new Presentation(reviews[j - 1], false, true, 0));
                 continue;
             }
-            finalArray.add(new Presentation(reviews[j - 1], false, false));
+            finalArray.add(new Presentation(reviews[j - 1], false, false, 1));
 
         }
         return finalArray;
@@ -41,11 +43,15 @@ public class Data {
     public static ArrayList<Poster> getPosterItems(Context context) {
         ArrayList<Poster> finalArray = new ArrayList<>();
         String[] reviews = context.getResources().getStringArray(R.array.poster_content);
-
-
         for (int i = 0; i < reviews.length - 1; i = i + 2) {
-            finalArray.add(new Poster(reviews[i], true, i));
-            finalArray.add(new Poster(reviews[i + 1], false, 0));
+            if (reviews[i].equalsIgnoreCase("Comment")) {
+                finalArray.add(new Poster(reviews[i], true, i));
+                finalArray.add(new Poster(reviews[i + 1], false, true, 1));
+            } else {
+                finalArray.add(new Poster(reviews[i], true, i));
+                finalArray.add(new Poster(reviews[i + 1], false, 0));
+            }
+
 
         }
 
