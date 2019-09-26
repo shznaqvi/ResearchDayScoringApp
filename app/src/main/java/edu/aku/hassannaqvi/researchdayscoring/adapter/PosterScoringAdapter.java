@@ -26,18 +26,9 @@ public class PosterScoringAdapter extends RecyclerView.Adapter<RecyclerView.View
     private final int VIEW_COMMENT = 2;
     Context context;
     ArrayList<Poster> list;
-    OnClickMinusPoint onClickMinusPoint;
-    OnClickPlusPoint onClickPlusPoint;
     int points = 5;
     int initPoint = 1;
 
-    public void setOnClickMinusPoint(OnClickMinusPoint onClickMinusPoint) {
-        this.onClickMinusPoint = onClickMinusPoint;
-    }
-
-    public void setOnClickPlusPoint(OnClickPlusPoint onClickPlusPoint) {
-        this.onClickPlusPoint = onClickPlusPoint;
-    }
 
     public PosterScoringAdapter(Context context, ArrayList<Poster> list) {
         this.context = context;
@@ -88,9 +79,8 @@ public class PosterScoringAdapter extends RecyclerView.Adapter<RecyclerView.View
             vh.bi.pointsPlus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (list.get(pos).score <= 4) {
+                    if (list.get(pos).score <= 3) {
                         vh.bi.counterText.setText(String.valueOf(++list.get(pos).score));
-
 
                     }
 
@@ -123,6 +113,7 @@ public class PosterScoringAdapter extends RecyclerView.Adapter<RecyclerView.View
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
 
                     list.get(i).comment = s.toString();
+
                 }
 
                 @Override
@@ -191,13 +182,4 @@ public class PosterScoringAdapter extends RecyclerView.Adapter<RecyclerView.View
         return list;
     }
 
-    interface OnClickPlusPoint {
-
-        void onClick(int i);
-    }
-
-    interface OnClickMinusPoint {
-
-        void onClick(int i);
-    }
 }

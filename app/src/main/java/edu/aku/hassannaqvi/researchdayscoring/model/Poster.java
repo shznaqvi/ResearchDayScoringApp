@@ -9,7 +9,7 @@ public class Poster {
     public boolean isComment;
     public int position;
     public int questionType = 0;
-    public int score;
+    public int score= 0;
 
     public Poster(boolean isSection, int position) {
         this.isSection = isSection;
@@ -29,10 +29,9 @@ public class Poster {
         this.score = score;
     }
 
-    public Poster(String posterReview, boolean isSection, boolean isComment,int questionType) {
+    public Poster(String posterReview, boolean isSection, boolean isComment) {
         this.posterReview = posterReview;
         this.isSection = isSection;
         this.isComment = isComment;
-        this.questionType = questionType;
     }
 }

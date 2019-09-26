@@ -22,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import edu.aku.hassannaqvi.researchdayscoring.contracts.FinalScoreContract;
 import edu.aku.hassannaqvi.researchdayscoring.contracts.FormsContract;
 import edu.aku.hassannaqvi.researchdayscoring.ui.EndingActivity;
 
@@ -41,6 +42,7 @@ public class MainApp extends Application {
     public static final String _UPDATE_URL = "http://" + MainApp._IP + ":" + MainApp._PORT + "/kmc/app/app-debug.apk";
 
     public static final Integer MONTHS_LIMIT = 11;
+    public static FinalScoreContract fsc;
     public static final Integer DAYS_LIMIT = 29;
     public static final String FORMTYPE0 = "f0";
     public static final String FORMTYPE0b = "f0b";

@@ -35,7 +35,6 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="?attr/actionBarSize"
-                            android:layout_marginTop="10dp"
                             android:background="#e6e6e6e6"
                             android:gravity="center"
                             android:text="Author"

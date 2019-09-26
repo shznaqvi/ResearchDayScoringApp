@@ -28,6 +28,7 @@ public class OralPresentationScoring extends AppCompatActivity {
     ActivityOralPresentationScoringBinding bi;
     PresentationScoringAdapter adapter;
     ProjectsContract contract;
+    ArrayList<Presentation> list;
 
 
     @Override
@@ -99,18 +100,28 @@ public class OralPresentationScoring extends AppCompatActivity {
         ArrayList<String> sectionName = new ArrayList<>();
 
         items = Data.getPresentationItems(this);
-        for (int i = 0; i < items.size(); i++) {
-            items.get(i).score = 0;
-        }
         adapter = new PresentationScoringAdapter(this, items);
         bi.posterContent.setLayoutManager(new LinearLayoutManager(this));
         bi.posterContent.setHasFixedSize(true);
         bi.posterContent.setAdapter(adapter);
 
+        list = new ArrayList<>();
+
         bi.submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                if (list.size() > 0) list.clear();
+                for (int i = 0; i < adapter.getList().size() - 2; i++) {
+
+                    if (!adapter.getList().get(i).isSection) {
+                        if (adapter.getList().get(i).score > 0) {
+                            list.add(adapter.getList().get(i));
+                        } else {
+                            Toast.makeText(OralPresentationScoring.this, "Please give answers of all questions", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                    }
+                }
             }
         });
 

@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
+import edu.aku.hassannaqvi.researchdayscoring.contracts.FinalScoreContract;
+import edu.aku.hassannaqvi.researchdayscoring.contracts.FinalScoreContract.singleColumn;
 import edu.aku.hassannaqvi.researchdayscoring.contracts.FormsContract;
 import edu.aku.hassannaqvi.researchdayscoring.contracts.FormsContract.FormsTable;
 import edu.aku.hassannaqvi.researchdayscoring.contracts.ProjectsContract;
@@ -54,6 +56,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + ProjectsTable.COLUMN_THEME + " TEXT,"
             + ProjectsTable.COLUMN_TYPE + " TEXT,"
             + ProjectsTable.COLUMN_ABSTRACTS + " TEXT"
+            + " );";
+    public static final String SQL_CREATE_FINAL_SCORE = "CREATE TABLE " + singleColumn.TABLE_NAME + "("
+            + singleColumn._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + singleColumn.COLUMN_PROJECT_ID + " TEXT,"
+            + singleColumn.COLUMN_TITLE + " TEXT,"
+            + singleColumn.COLUMN_AUTHOR + " TEXT,"
+            + singleColumn.COLUMN_THEME + " TEXT,"
+            + singleColumn.COLUMN_TYPE + " TEXT,"
+            + singleColumn.COLUMN_ABSTRACTS + " TEXT,"
+            + singleColumn.COLUMN_JUDGE + " TEXT,"
+            + singleColumn.COLUMN_JUDGE + " TEXT,"
+            + singleColumn.COLUMN_CONTENT + " TEXT,"
+            + singleColumn.COLUMN_SCORE + " TEXT"
             + " );";
 
 
@@ -103,6 +118,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String SQL_DELETE_FORMS = "DROP TABLE IF EXISTS " + FormsTable.TABLE_NAME;
     private static final String SQL_DELETE_USERS = "DROP TABLE IF EXISTS " + UsersTable.TABLE_NAME;
     private static final String SQL_DELETE_PROJECTS = "DROP TABLE IF EXISTS " + ProjectsTable.TABLE_NAME;
+    private static final String SQL_DELETE_FINAL_SCORE = "DROP TABLE IF EXISTS " + singleColumn.TABLE_NAME;
 
     private final String TAG = "DatabaseHelper";
     public String spDateT = new SimpleDateFormat("dd-MM-yy").format(new Date().getTime());
@@ -116,6 +132,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.execSQL(SQL_CREATE_USERS);
         db.execSQL(SQL_CREATE_PROJECTS);
+        db.execSQL(SQL_CREATE_FINAL_SCORE);
 
 
     }
@@ -132,6 +149,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.execSQL(SQL_DELETE_USERS);
         db.execSQL(SQL_DELETE_PROJECTS);
+        db.execSQL(SQL_DELETE_FINAL_SCORE);
 
     }
 
@@ -163,51 +181,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cursorCount > 0;
     }
 
-    public Long addForm(FormsContract fc) {
+    public Long addForm(FinalScoreContract fc) {
 
         // Gets the data repository in write mode
         SQLiteDatabase db = this.getWritableDatabase();
 
 // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
-        values.put(FormsTable.COLUMN_PROJECTNAME, fc.getProjectName());
-        values.put(FormsTable.COLUMN_SURVEYTYPE, fc.getSurveyType());
-        values.put(FormsTable.COLUMN__UID, fc.getUID());
-        values.put(FormsTable.COLUMN_FORMDATE, fc.getFormDate());
-        values.put(FormsTable.COLUMN_USER, fc.getUser());
-        values.put(FormsTable.COLUMN_ISTATUS, fc.getIstatus());
-        values.put(FormsTable.COLUMN_ISTATUS88X, fc.getIstatus88x());
-        values.put(FormsTable.COLUMN_SINFO, fc.getsInfo());
-        values.put(FormsTable.COLUMN_SA, fc.getsA());
-        values.put(FormsTable.COLUMN_SB, fc.getsB());
-        values.put(FormsTable.COLUMN_FORMTYPE, fc.getFormType());
-        values.put(FormsTable.COLUMN_SC, fc.getsC());
-        values.put(FormsTable.COLUMN_SD, fc.getsD());
-        values.put(FormsTable.COLUMN_SE, fc.getsE());
-        values.put(FormsTable.COLUMN_SF, fc.getsF());
-        values.put(FormsTable.COLUMN_ENDINGDATETIME, fc.getEndingdatetime());
-        values.put(FormsTable.COLUMN_GPSLAT, fc.getGpsLat());
-        values.put(FormsTable.COLUMN_GPSLNG, fc.getGpsLng());
-        values.put(FormsTable.COLUMN_GPSDT, fc.getGpsDT());
-        values.put(FormsTable.COLUMN_GPSACC, fc.getGpsAcc());
-        values.put(FormsTable.COLUMN_GPSALTITUDE, fc.getGpsAltitude());
-        values.put(FormsTable.COLUMN_DEVICEID, fc.getDeviceID());
-        values.put(FormsTable.COLUMN_DEVICETAGID, fc.getDevicetagID());
-        values.put(FormsTable.COLUMN_SYNCED, fc.getSynced());
-        values.put(FormsTable.COLUMN_SYNCED_DATE, fc.getSynced_date());
-        values.put(FormsTable.COLUMN_APPVERSION, fc.getAppversion());
-        values.put(FormsTable.COLUMN_PWID, fc.getPwid());
-        values.put(FormsTable.COLUMN_SCREENID, fc.getScreenid());
-        values.put(FormsTable.COLUMN_UC, fc.getUc());
-        values.put(FormsTable.COLUMN_TALUKA, fc.getTaluka());
-        values.put(FormsTable.COLUMN_VILLAGE, fc.getVillage());
+        values.put(singleColumn.COLUMN_ABSTRACTS, fc.getAbstract());
+        values.put(singleColumn.COLUMN_AUTHOR, fc.getAuthor());
+        values.put(singleColumn.COLUMN_JUDGE, fc.getJudgeName());
+        values.put(singleColumn.COLUMN_PROJECT_ID, fc.getProj_id());
+        values.put(singleColumn.COLUMN_SCORE, fc.getScore());
+        values.put(singleColumn.COLUMN_THEME, fc.getTheme());
+        values.put(singleColumn.COLUMN_TITLE, fc.getTitle());
+        values.put(singleColumn.COLUMN_TYPE, fc.getType());
+        values.put(singleColumn.COLUMN_CONTENT, fc.getContent());
 
 
         // Insert the new row, returning the primary key value of the new row
         long newRowId;
         newRowId = db.insert(
-                FormsTable.TABLE_NAME,
-                FormsTable.COLUMN_NAME_NULLABLE,
+                singleColumn.TABLE_NAME,
+                null,
                 values);
         return newRowId;
     }
@@ -403,133 +399,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public int updateSA() {
-        SQLiteDatabase db = this.getReadableDatabase();
-
-// New value for one column
-        ContentValues values = new ContentValues();
-        values.put(FormsTable.COLUMN_SA, fc.getsA());
-
-// Which row to update, based on the ID
-        String selection = FormsTable._ID + " = ?";
-        String[] selectionArgs = {String.valueOf(fc.get_ID())};
-
-        int count = db.update(FormsTable.TABLE_NAME,
-                values,
-                selection,
-                selectionArgs);
-        return count;
-    }
-
-    public int updateSB() {
-        SQLiteDatabase db = this.getReadableDatabase();
-
-// New value for one column
-        ContentValues values = new ContentValues();
-        values.put(FormsTable.COLUMN_SB, fc.getsB());
-
-// Which row to update, based on the ID
-        String selection = FormsTable._ID + " = ?";
-        String[] selectionArgs = {String.valueOf(fc.get_ID())};
-
-        int count = db.update(FormsTable.TABLE_NAME,
-                values,
-                selection,
-                selectionArgs);
-        return count;
-    }
-
-    public int updateSC() {
-        SQLiteDatabase db = this.getReadableDatabase();
-
-// New value for one column
-        ContentValues values = new ContentValues();
-        values.put(FormsTable.COLUMN_SC, fc.getsC());
-
-// Which row to update, based on the ID
-        String selection = FormsTable._ID + " = ?";
-        String[] selectionArgs = {String.valueOf(fc.get_ID())};
-
-        int count = db.update(FormsTable.TABLE_NAME,
-                values,
-                selection,
-                selectionArgs);
-        return count;
-    }
-
-    public int updateSD() {
-        SQLiteDatabase db = this.getReadableDatabase();
-
-// New value for one column
-        ContentValues values = new ContentValues();
-        values.put(FormsTable.COLUMN_SD, fc.getsD());
-
-// Which row to update, based on the ID
-        String selection = FormsTable._ID + " = ?";
-        String[] selectionArgs = {String.valueOf(fc.get_ID())};
-
-        int count = db.update(FormsTable.TABLE_NAME,
-                values,
-                selection,
-                selectionArgs);
-        return count;
-    }
-
-    public int updateSE() {
-        SQLiteDatabase db = this.getReadableDatabase();
-
-// New value for one column
-        ContentValues values = new ContentValues();
-        values.put(FormsTable.COLUMN_SE, fc.getsE());
-
-// Which row to update, based on the ID
-        String selection = FormsTable._ID + " = ?";
-        String[] selectionArgs = {String.valueOf(fc.get_ID())};
-
-        int count = db.update(FormsTable.TABLE_NAME,
-                values,
-                selection,
-                selectionArgs);
-        return count;
-    }
-
-    public int updateSF() {
-        SQLiteDatabase db = this.getReadableDatabase();
-
-// New value for one column
-        ContentValues values = new ContentValues();
-        values.put(FormsTable.COLUMN_SF, fc.getsF());
-
-// Which row to update, based on the ID
-        String selection = FormsTable._ID + " = ?";
-        String[] selectionArgs = {String.valueOf(fc.get_ID())};
-
-        int count = db.update(FormsTable.TABLE_NAME,
-                values,
-                selection,
-                selectionArgs);
-        return count;
-    }
-
-    public int updateEnding() {
-        SQLiteDatabase db = this.getReadableDatabase();
-
-// New value for one column
-        ContentValues values = new ContentValues();
-        values.put(FormsTable.COLUMN_ISTATUS, fc.getIstatus());
-        values.put(FormsTable.COLUMN_ISTATUS88X, fc.getIstatus88x());
-        values.put(FormsTable.COLUMN_ENDINGDATETIME, fc.getEndingdatetime());
-
-// Which row to update, based on the ID
-        String selection = FormsTable._ID + " =? ";
-        String[] selectionArgs = {String.valueOf(fc.get_ID())};
-
-        int count = db.update(FormsTable.TABLE_NAME,
-                values,
-                selection,
-                selectionArgs);
-        return count;
-    }
 
     public ProjectsContract getProject(String id, String type) {
 //        List<ProjectsContract> formList = new ArrayList<>();

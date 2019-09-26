@@ -30,11 +30,10 @@ public class Presentation {
         this.score = score;
     }
 
-    public Presentation(String presentationReview, boolean isSection, boolean isComment, int questionType) {
+    public Presentation(String presentationReview, boolean isSection, boolean isComment) {
         this.presentationReview = presentationReview;
         this.isSection = isSection;
         this.isComment = isComment;
-        this.questionType = questionType;
     }
 }
 

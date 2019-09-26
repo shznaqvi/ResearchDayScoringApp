@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import edu.aku.hassannaqvi.researchdayscoring.R;
+import edu.aku.hassannaqvi.researchdayscoring.core.AndroidDatabaseManager;
 
 public class ResearchActivity extends AppCompatActivity {
 
@@ -47,7 +48,7 @@ public class ResearchActivity extends AppCompatActivity {
                         Toast.makeText(ResearchActivity.this, "Presentation Abstracts", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.presentation_abstracts:
-//                        startActivity(new Intent(ResearchActivity.this, AndroidDatabaseManager.class));
+                        startActivity(new Intent(ResearchActivity.this, AndroidDatabaseManager.class));
                         break;
                     case R.id.poster_scores:
                         startActivity(new Intent(ResearchActivity.this, PosterScoring.class));
