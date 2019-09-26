@@ -14,19 +14,14 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 
 import edu.aku.hassannaqvi.researchdayscoring.contracts.FinalScoreContract;
 import edu.aku.hassannaqvi.researchdayscoring.contracts.FinalScoreContract.singleColumn;
-import edu.aku.hassannaqvi.researchdayscoring.contracts.FormsContract;
-import edu.aku.hassannaqvi.researchdayscoring.contracts.FormsContract.FormsTable;
 import edu.aku.hassannaqvi.researchdayscoring.contracts.ProjectsContract;
 import edu.aku.hassannaqvi.researchdayscoring.contracts.ProjectsContract.ProjectsTable;
 import edu.aku.hassannaqvi.researchdayscoring.contracts.UsersContract;
 import edu.aku.hassannaqvi.researchdayscoring.contracts.UsersContract.UsersTable;
-
-import static edu.aku.hassannaqvi.researchdayscoring.core.MainApp.fc;
 
 
 /**
@@ -66,56 +61,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + singleColumn.COLUMN_TYPE + " TEXT,"
             + singleColumn.COLUMN_ABSTRACTS + " TEXT,"
             + singleColumn.COLUMN_JUDGE + " TEXT,"
-            + singleColumn.COLUMN_JUDGE + " TEXT,"
             + singleColumn.COLUMN_CONTENT + " TEXT,"
-            + singleColumn.COLUMN_SCORE + " TEXT"
+            + singleColumn.COLUMN_SCORE + " TEXT,"
+            + singleColumn.COLUMN_SYNCED + " TEXT,"
+            + singleColumn.COLUMN_SYNCED_DATE + " TEXT"
             + " );";
 
-
-//    private static final String SQL_CREATE_FORMS = "CREATE TABLE "
-//            + FormsTable.TABLE_NAME + "("
-//            + FormsTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-//            FormsTable.COLUMN_PROJECTNAME + " TEXT," +
-//            FormsTable.COLUMN_DEVICEID + " TEXT," +
-//            FormsTable.COLUMN_DEVICETAGID + " TEXT," +
-//            FormsTable.COLUMN_APPVERSION + " TEXT," +
-//            FormsTable.COLUMN_FORMTYPE + " TEXT," +
-//            FormsTable.COLUMN_SURVEYTYPE + " TEXT," +
-//            FormsTable.COLUMN_FORMDATE + " TEXT," +
-//            FormsTable.COLUMN__UID + " TEXT," +
-//            FormsTable.COLUMN_USER + " TEXT," +
-//            FormsTable.COLUMN_GPSLAT + " TEXT," +
-//            FormsTable.COLUMN_GPSLNG + " TEXT," +
-//            FormsTable.COLUMN_GPSDT + " TEXT," +
-//            FormsTable.COLUMN_GPSACC + " TEXT," +
-//            FormsTable.COLUMN_GPSALTITUDE + " TEXT," +
-//            FormsTable.COLUMN_PWID + " TEXT," +
-//            FormsTable.COLUMN_SCREENID + " TEXT," +
-//            FormsTable.COLUMN_TALUKA + " TEXT," +
-//            FormsTable.COLUMN_UC + " TEXT," +
-//            FormsTable.COLUMN_VILLAGE + " TEXT," +
-//            FormsTable.COLUMN_SINFO + " TEXT," +
-//            FormsTable.COLUMN_SA + " TEXT," +
-//            FormsTable.COLUMN_SB + " TEXT," +
-//            FormsTable.COLUMN_SC + " TEXT," +
-//            FormsTable.COLUMN_SD + " TEXT," +
-//            FormsTable.COLUMN_SE + " TEXT," +
-//            FormsTable.COLUMN_SF + " TEXT," +
-//            FormsTable.COLUMN_ENDINGDATETIME + " TEXT," +
-//            FormsTable.COLUMN_ISTATUS + " TEXT," +
-//            FormsTable.COLUMN_ISTATUS88X + " TEXT," +
-//            FormsTable.COLUMN_SYNCED + " TEXT," +
-//            FormsTable.COLUMN_SYNCED_DATE + " TEXT"
-//            + " );";
-//
-//    private static final String SQL_ALTER_FORMS = "ALTER TABLE " +
-//            FormsTable.TABLE_NAME + " ADD COLUMN " +
-//            FormsTable.COLUMN_SCREENID + " TEXT;";
-
-
-    //    private static final String SQL_DELETE_USERS = "DROP TABLE IF EXISTS " + UsersContract.UsersTable.TABLE_NAME;
-//    private static final String SQL_DELETE_USERS = "DROP TABLE IF EXISTS " + UsersContract.UsersTable.TABLE_NAME;
-    private static final String SQL_DELETE_FORMS = "DROP TABLE IF EXISTS " + FormsTable.TABLE_NAME;
     private static final String SQL_DELETE_USERS = "DROP TABLE IF EXISTS " + UsersTable.TABLE_NAME;
     private static final String SQL_DELETE_PROJECTS = "DROP TABLE IF EXISTS " + ProjectsTable.TABLE_NAME;
     private static final String SQL_DELETE_FINAL_SCORE = "DROP TABLE IF EXISTS " + singleColumn.TABLE_NAME;
@@ -139,13 +90,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-        /*db.execSQL(SQL_DELETE_USERS);
-        db.execSQL(SQL_DELETE_FORMS);
-        db.execSQL(SQL_DELETE_TALUKA);
-        db.execSQL(SQL_DELETE_UCS);
-        db.execSQL(SQL_DELETE_VILLAGE);
-        db.execSQL(SQL_DELETE_MWRA);
-        db.execSQL(SQL_DELETE_MWRASCREENED);*/
 
         db.execSQL(SQL_DELETE_USERS);
         db.execSQL(SQL_DELETE_PROJECTS);
@@ -210,89 +154,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public void updateSyncedForms(String id) {
         SQLiteDatabase db = this.getReadableDatabase();
-
-// New value for one column
         ContentValues values = new ContentValues();
-        values.put(FormsTable.COLUMN_SYNCED, true);
-        values.put(FormsTable.COLUMN_SYNCED_DATE, new Date().toString());
+        values.put(singleColumn.COLUMN_SYNCED, true);
+        values.put(singleColumn.COLUMN_SYNCED_DATE, new Date().toString());
 
 // Which row to update, based on the title
-        String where = FormsTable._ID + " = ?";
+        String where = singleColumn._ID + " = ?";
         String[] whereArgs = {id};
 
         int count = db.update(
-                FormsTable.TABLE_NAME,
+                singleColumn.TABLE_NAME,
                 values,
                 where,
                 whereArgs);
     }
 
-    public int updateFormID() {
-        SQLiteDatabase db = this.getReadableDatabase();
-
-// New value for one column
-        ContentValues values = new ContentValues();
-        values.put(FormsTable.COLUMN__UID, fc.getUID());
-
-// Which row to update, based on the ID
-        String selection = FormsTable.COLUMN__ID + " = ?";
-        String[] selectionArgs = {String.valueOf(fc.get_ID())};
-
-        int count = db.update(FormsTable.TABLE_NAME,
-                values,
-                selection,
-                selectionArgs);
-        return count;
-    }
-
-    public Collection<FormsContract> getTodayForms() {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor c = null;
-        String[] columns = {
-                FormsTable._ID,
-                //ChildTable.COLUMN_DSSID,
-                FormsTable.COLUMN_FORMDATE,
-                FormsTable.COLUMN_ISTATUS,
-                FormsTable.COLUMN_SYNCED,
-
-        };
-        String whereClause = FormsTable.COLUMN_FORMDATE + " Like ? ";
-        String[] whereArgs = new String[]{"%" + spDateT.substring(0, 8).trim() + "%"};
-        String groupBy = null;
-        String having = null;
-
-        String orderBy =
-                FormsTable._ID + " ASC";
-
-        Collection<FormsContract> allFC = new ArrayList<>();
-        try {
-            c = db.query(
-                    FormsTable.TABLE_NAME,  // The table to query
-                    columns,                   // The columns to return
-                    whereClause,               // The columns for the WHERE clause
-                    whereArgs,                 // The values for the WHERE clause
-                    groupBy,                   // don't group the rows
-                    having,                    // don't filter by row groups
-                    orderBy                    // The sort order
-            );
-            while (c.moveToNext()) {
-                FormsContract fc = new FormsContract();
-                fc.set_ID(c.getString(c.getColumnIndex(FormsTable._ID)));
-                fc.setFormDate(c.getString(c.getColumnIndex(FormsTable.COLUMN_FORMDATE)));
-                fc.setIstatus(c.getString(c.getColumnIndex(FormsTable.COLUMN_ISTATUS)));
-                fc.setSynced(c.getString(c.getColumnIndex(FormsTable.COLUMN_SYNCED)));
-                allFC.add(fc);
-            }
-        } finally {
-            if (c != null) {
-                c.close();
-            }
-            if (db != null) {
-                db.close();
-            }
-        }
-        return allFC;
-    }
 
     public void syncUser(JSONArray userlist) {
         SQLiteDatabase db = this.getWritableDatabase();

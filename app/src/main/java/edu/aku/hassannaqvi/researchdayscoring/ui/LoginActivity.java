@@ -124,7 +124,7 @@ public class LoginActivity extends AppCompatActivity {
                 if ((mEmail.equals("dmu@aku") && mPassword.equals("aku?dmu")) || db.Login(mEmail, mPassword)
                         || (mEmail.equals("test1234") && mPassword.equals("test1234"))) {
                     MainApp.userName = mEmail;
-                    MainApp.admin = mEmail.contains("@");
+//                    MainApp.admin = mEmail.contains("@");
 
                     Intent iLogin = new Intent(LoginActivity.this, ResearchActivity.class);
                     startActivity(iLogin);

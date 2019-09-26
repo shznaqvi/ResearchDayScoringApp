@@ -12,6 +12,7 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import edu.aku.hassannaqvi.researchdayscoring.R;
@@ -34,6 +35,9 @@ public class PosterScoring extends AppCompatActivity {
     PosterScoringAdapter adapter;
     ProjectsContract contract;
     ArrayList<Poster> list;
+    AlertDialog dialog;
+    DecimalFormat formatter = new DecimalFormat("00");
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +56,7 @@ public class PosterScoring extends AppCompatActivity {
         View view = LayoutInflater.from(this).inflate(R.layout.dialog_layout, null);
         builder.setView(view);
         final DialogLayoutBinding binding = DataBindingUtil.bind(view);
-        final AlertDialog dialog = builder.create();
+        dialog = builder.create();
         dialog.show();
         assert binding != null;
         binding.enterProjectIdBtn.setOnClickListener(new View.OnClickListener() {
@@ -60,11 +64,11 @@ public class PosterScoring extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (!binding.etProjectID.getText().toString().equals("")) {
-
                     String projID = binding.etProjectID.getText().toString();
                     gettingDataFromDB(projID);
-                    dialog.dismiss();
 
+                } else {
+                    binding.etProjectID.setError("This field is required");
                 }
 
             }
@@ -86,9 +90,11 @@ public class PosterScoring extends AppCompatActivity {
         contract = db.getProject(projID, "1");
         if (contract.getTitle() != null) {
             init();
-            bi.notFound.setVisibility(View.GONE);
+//            bi.notFound.setVisibility(View.GONE);
+            dialog.dismiss();
         } else {
-            bi.notFound.setVisibility(View.VISIBLE);
+            Toast.makeText(this, "Data not found!", Toast.LENGTH_SHORT).show();
+//            bi.notFound.setVisibility(View.VISIBLE);
         }
 
 
@@ -185,15 +191,16 @@ public class PosterScoring extends AppCompatActivity {
         MainApp.fsc.setProj_id(contract.getProj_id());
         MainApp.fsc.setTitle(contract.getTitle());
         MainApp.fsc.setType(contract.getType());
+        MainApp.fsc.setTheme(contract.getTheme());
         MainApp.fsc.setJudgeName(MainApp.userName);
         int score = 0;
 
         JSONObject object = new JSONObject();
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).isComment) {
-                object.put("pos" + i, list.get(i).comment);
+                object.put("pos" + formatter.format(i + 1), list.get(i).comment);
             } else {
-                object.put("pos" + i, list.get(i).score);
+                object.put("pos" + formatter.format(i + 1), list.get(i).score);
                 score += list.get(i).score;
             }
 

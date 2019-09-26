@@ -9,7 +9,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorAccent">
+            android:background="@color/colorPrimary">
 
 
             <ImageView
@@ -48,7 +48,7 @@
             <Button
                 android:id="@+id/btnNo"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="?attr/actionBarSize"
                 android:layout_weight="1"
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:text="No"
@@ -58,7 +58,7 @@
             <Button
                 android:id="@+id/btnYes"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="?attr/actionBarSize"
                 android:layout_weight="1"
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:text="Yes"

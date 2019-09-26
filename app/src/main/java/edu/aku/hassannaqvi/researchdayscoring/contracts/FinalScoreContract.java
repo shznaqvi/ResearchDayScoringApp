@@ -21,6 +21,8 @@ public class FinalScoreContract {
     private String abstracts;
     private String type;
     private String score;
+    private String synced;
+    private String sycnedDate;
 
     public String getContent() {
         return content;
@@ -139,6 +141,8 @@ public class FinalScoreContract {
         this.judgeName = cursor.getString(cursor.getColumnIndex(singleColumn.COLUMN_JUDGE));
         this.score = cursor.getString(cursor.getColumnIndex(singleColumn.COLUMN_SCORE));
         this.content = cursor.getString(cursor.getColumnIndex(singleColumn.COLUMN_CONTENT));
+        this.synced = cursor.getString(cursor.getColumnIndex(singleColumn.COLUMN_SYNCED));
+        this.sycnedDate = cursor.getString(cursor.getColumnIndex(singleColumn.COLUMN_SYNCED_DATE));
         return this;
 
     }
@@ -156,6 +160,8 @@ public class FinalScoreContract {
         json.put(singleColumn.COLUMN_TYPE, this.type == null ? JSONObject.NULL : this.type);
         json.put(singleColumn.COLUMN_SCORE, this.score == null ? JSONObject.NULL : this.score);
         json.put(singleColumn.COLUMN_JUDGE, this.judgeName == null ? JSONObject.NULL : this.judgeName);
+        json.put(singleColumn.COLUMN_SYNCED, this.synced == null ? JSONObject.NULL : this.synced);
+        json.put(singleColumn.COLUMN_SYNCED_DATE, this.sycnedDate == null ? JSONObject.NULL : this.sycnedDate);
         return json;
     }
 
@@ -172,8 +178,10 @@ public class FinalScoreContract {
         public static final String COLUMN_TITLE = "proj_title";
         public static final String COLUMN_ABSTRACTS = "proj_abstract";
         public static final String COLUMN_TYPE = "proj_type";
-
-        public static final String _URI = "projects.php";
+        public static final String COLUMN_SYNCED = "synced";
+        public static final String COLUMN_SYNCED_DATE = "synced_date";
+        public static final String _URL1 = "posterscores.php";
+        public static final String _URL2 = "presentationscores.php";
 
     }
 }

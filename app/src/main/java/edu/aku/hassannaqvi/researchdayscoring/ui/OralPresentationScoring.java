@@ -9,13 +9,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import edu.aku.hassannaqvi.researchdayscoring.R;
 import edu.aku.hassannaqvi.researchdayscoring.adapter.PresentationScoringAdapter;
+import edu.aku.hassannaqvi.researchdayscoring.contracts.FinalScoreContract;
 import edu.aku.hassannaqvi.researchdayscoring.contracts.ProjectsContract;
 import edu.aku.hassannaqvi.researchdayscoring.core.DatabaseHelper;
+import edu.aku.hassannaqvi.researchdayscoring.core.MainApp;
 import edu.aku.hassannaqvi.researchdayscoring.databinding.ActivityOralPresentationScoringBinding;
+import edu.aku.hassannaqvi.researchdayscoring.databinding.CustomDialogLayoutBinding;
 import edu.aku.hassannaqvi.researchdayscoring.databinding.DialogLayoutBinding;
 import edu.aku.hassannaqvi.researchdayscoring.model.Data;
 import edu.aku.hassannaqvi.researchdayscoring.model.Presentation;
@@ -29,6 +36,8 @@ public class OralPresentationScoring extends AppCompatActivity {
     PresentationScoringAdapter adapter;
     ProjectsContract contract;
     ArrayList<Presentation> list;
+    DecimalFormat formatter = new DecimalFormat("00");
+    AlertDialog dialog;
 
 
     @Override
@@ -36,7 +45,6 @@ public class OralPresentationScoring extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         bi = DataBindingUtil.setContentView(this, R.layout.activity_oral_presentation_scoring);
-
         OpeningDialog();
 
     }
@@ -46,7 +54,7 @@ public class OralPresentationScoring extends AppCompatActivity {
         View view = LayoutInflater.from(this).inflate(R.layout.dialog_layout, null);
         builder.setView(view);
         final DialogLayoutBinding binding = DataBindingUtil.bind(view);
-        final AlertDialog dialog = builder.create();
+        dialog = builder.create();
         dialog.show();
         assert binding != null;
         binding.enterProjectIdBtn.setOnClickListener(new View.OnClickListener() {
@@ -80,9 +88,9 @@ public class OralPresentationScoring extends AppCompatActivity {
         contract = db.getProject(projID, "2");
         if (contract.getTitle() != null) {
             init();
-            bi.notFound.setVisibility(View.GONE);
+            dialog.dismiss();
         } else {
-            bi.notFound.setVisibility(View.VISIBLE);
+            Toast.makeText(this, "Data not found", Toast.LENGTH_SHORT).show();
         }
 
 
@@ -116,16 +124,87 @@ public class OralPresentationScoring extends AppCompatActivity {
                     if (!adapter.getList().get(i).isSection) {
                         if (adapter.getList().get(i).score > 0) {
                             list.add(adapter.getList().get(i));
-                        } else {
-                            Toast.makeText(OralPresentationScoring.this, "Please give answers of all questions", Toast.LENGTH_SHORT).show();
-                            return;
                         }
                     }
+                }
+                openDialog();
+            }
+        });
+
+
+    }
+
+    private void openDialog() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View view = LayoutInflater.from(this).inflate(R.layout.custom_dialog_layout, null);
+        builder.setView(view);
+        final AlertDialog dialog = builder.create();
+        dialog.show();
+        CustomDialogLayoutBinding bi = DataBindingUtil.bind(view);
+
+        bi.btnNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                dialog.dismiss();
+            }
+        });
+
+        bi.btnYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                try {
+                    saveDraft();
+                    if (updateDB()) {
+                        finish();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
             }
         });
 
 
+    }
+
+    private boolean updateDB() {
+        DatabaseHelper db = new DatabaseHelper(this);
+        long rowID = db.addForm(MainApp.fsc);
+        if (rowID != 0) {
+            Toast.makeText(this, "successfully added!", Toast.LENGTH_SHORT).show();
+            return true;
+        } else {
+            Toast.makeText(this, "database error!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+    }
+
+    private void saveDraft() throws JSONException {
+
+        MainApp.fsc = new FinalScoreContract();
+        MainApp.fsc.setAbstract(contract.getAbstract());
+        MainApp.fsc.setAuthor(contract.getAuthor());
+        MainApp.fsc.setProj_id(contract.getProj_id());
+        MainApp.fsc.setTitle(contract.getTitle());
+        MainApp.fsc.setType(contract.getType());
+        MainApp.fsc.setTheme(contract.getTheme());
+        MainApp.fsc.setJudgeName(MainApp.userName);
+        int score = 0;
+
+        JSONObject object = new JSONObject();
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).isComment) {
+                object.put("pres" + formatter.format(i + 1), list.get(i).comment);
+            } else {
+                object.put("pres" + formatter.format(i + 1), list.get(i).score);
+                score += list.get(i).score;
+            }
+
+        }
+        MainApp.fsc.setContent(String.valueOf(object));
+        MainApp.fsc.setScore(String.valueOf(score));
     }
 
 }
