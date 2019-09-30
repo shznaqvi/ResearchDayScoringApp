@@ -44,10 +44,10 @@ public class ResearchActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
                 switch (id) {
-                    case R.id.poster_abstracts:
-                        Toast.makeText(ResearchActivity.this, "Presentation Abstracts", Toast.LENGTH_SHORT).show();
+                    case R.id.allPresProjects:
+                        startActivity(new Intent(ResearchActivity.this, AllPresProjectsActivity.class));
                         break;
-                    case R.id.presentation_abstracts:
+                    case R.id.allPosProjects:
                         startActivity(new Intent(ResearchActivity.this, AndroidDatabaseManager.class));
                         break;
                     case R.id.poster_scores:
@@ -57,7 +57,6 @@ public class ResearchActivity extends AppCompatActivity {
                     case R.id.presentation_scores:
                         startActivity(new Intent(ResearchActivity.this, OralPresentationScoring.class));
                         dl.closeDrawer(GravityCompat.START);
-
                         break;
                     default:
                         return true;

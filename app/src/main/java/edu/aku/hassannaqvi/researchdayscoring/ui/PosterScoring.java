@@ -26,7 +26,6 @@ import edu.aku.hassannaqvi.researchdayscoring.databinding.CustomDialogLayoutBind
 import edu.aku.hassannaqvi.researchdayscoring.databinding.DialogLayoutBinding;
 import edu.aku.hassannaqvi.researchdayscoring.model.Data;
 import edu.aku.hassannaqvi.researchdayscoring.model.Poster;
-
 public class PosterScoring extends AppCompatActivity {
 
     private static final String TAG = "PosterScoring";
@@ -87,7 +86,7 @@ public class PosterScoring extends AppCompatActivity {
 
     private void gettingDataFromDB(String projID) {
         DatabaseHelper db = new DatabaseHelper(this);
-        contract = db.getProject(projID, "1");
+        contract = db.getSingleProject(projID, "1");
         if (contract.getTitle() != null) {
             init();
 //            bi.notFound.setVisibility(View.GONE);

@@ -20,6 +20,16 @@ public class UsersContract {
     String userType;
     String userRole;
 
+    String proj_ids;
+
+    public String getProj_ids() {
+        return proj_ids;
+    }
+
+    public void setProj_ids(String proj_ids) {
+        this.proj_ids = proj_ids;
+    }
+
     public String getFullname() {
         return fullname;
     }
@@ -79,13 +89,13 @@ public class UsersContract {
         this.COLUMN_PASSWORD = password;
     }
 
-
     public UsersContract Sync(JSONObject jsonObject) throws JSONException {
         this.COLUMN_USERNAME = jsonObject.getString(UsersTable.COLUMN_USERNAME);
         this.COLUMN_PASSWORD = jsonObject.getString(UsersTable.COLUMN_PASSWORD);
         this.userRole = jsonObject.getString(UsersTable.COLUMN_USER_ROLE);
         this.userType = jsonObject.getString(UsersTable.COLUMN_USER_TYPE);
         this.fullname = jsonObject.getString(UsersTable.COLUMN_FULLNAME);
+        this.proj_ids = jsonObject.getString(UsersTable.COLUMN_PROJ_IDS);
         return this;
 
     }
@@ -117,6 +127,7 @@ public class UsersContract {
         public static final String COLUMN_FULLNAME = "full_name";
         public static final String COLUMN_USER_TYPE = "user_type";
         public static final String COLUMN_USER_ROLE = "user_role";
+        public static final String COLUMN_PROJ_IDS = "proj_ids";
 
 
         public static final String _URI = "users.php";

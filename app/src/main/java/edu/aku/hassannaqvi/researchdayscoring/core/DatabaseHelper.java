@@ -14,7 +14,9 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import edu.aku.hassannaqvi.researchdayscoring.contracts.FinalScoreContract;
 import edu.aku.hassannaqvi.researchdayscoring.contracts.FinalScoreContract.singleColumn;
@@ -41,7 +43,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + UsersTable.COLUMN_PASSWORD + " TEXT,"
             + UsersTable.COLUMN_FULLNAME + " TEXT,"
             + UsersTable.COLUMN_USER_ROLE + " TEXT,"
-            + UsersTable.COLUMN_USER_TYPE + " TEXT"
+            + UsersTable.COLUMN_USER_TYPE + " TEXT,"
+            + UsersTable.COLUMN_PROJ_IDS + " TEXT"
             + " );";
     public static final String SQL_CREATE_PROJECTS = "CREATE TABLE " + ProjectsTable.TABLE_NAME + "("
             + ProjectsTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -104,7 +107,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 // New value for one column
         String[] columns = {
-                UsersTable._ID
+                UsersTable._ID,
+                UsersTable.COLUMN_PROJ_IDS
         };
 
 // Which row to update, based on the ID
@@ -118,6 +122,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 null,                       //filter by row groups
                 null);                      //The sort order
 
+        if (cursor.moveToFirst()) {
+            MainApp.projIDs = cursor.getString(cursor.getColumnIndex(UsersTable.COLUMN_PROJ_IDS));
+            cursor.moveToNext();
+        }
         int cursorCount = cursor.getCount();
 
         cursor.close();
@@ -188,6 +196,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 values.put(UsersTable.COLUMN_FULLNAME, user.getFullname());
                 values.put(UsersTable.COLUMN_USER_ROLE, user.getUserRole());
                 values.put(UsersTable.COLUMN_USER_TYPE, user.getUserType());
+                values.put(UsersTable.COLUMN_PROJ_IDS, user.getProj_ids());
                 db.insert(UsersTable.TABLE_NAME, null, values);
             }
 
@@ -211,7 +220,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 ProjectsContract proj = new ProjectsContract();
                 proj.Sync(jsonObjectUser);
                 ContentValues values = new ContentValues();
-
                 values.put(ProjectsTable.COLUMN_PROJECT_ID, proj.getProj_id());
                 values.put(ProjectsTable.COLUMN_ABSTRACTS, proj.getAbstract());
                 values.put(ProjectsTable.COLUMN_AUTHOR, proj.getAuthor());
@@ -276,7 +284,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public ProjectsContract getProject(String id, String type) {
+    public ProjectsContract getSingleProject(String id, String type) {
 //        List<ProjectsContract> formList = new ArrayList<>();
         ProjectsContract pc = new ProjectsContract();
 
@@ -311,5 +319,42 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             } while (c.moveToNext());
         }
         return pc;
+    }
+
+    public List<ProjectsContract> getAllProject(String projIDs, String type) {
+//        List<ProjectsContract> formList = new ArrayList<>();
+        ProjectsContract pc = new ProjectsContract();
+        List<ProjectsContract> list = new ArrayList<>();
+
+        List<String> items = Arrays.asList(projIDs.split("\\s*,\\s*"));
+        String[] columns = {
+                ProjectsTable.COLUMN_ABSTRACTS,
+                ProjectsTable.COLUMN_THEME,
+                ProjectsTable.COLUMN_AUTHOR,
+                ProjectsTable.COLUMN_TITLE,
+                ProjectsTable.COLUMN_TYPE,
+                ProjectsTable.COLUMN_PROJECT_ID,
+
+        };
+        String selection = ProjectsTable.COLUMN_PROJECT_ID + " = ? AND " + ProjectsTable.COLUMN_TYPE + " = ?";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        for (int i = 0; i < items.size(); i++) {
+            String[] selectionArgs = {items.get(i), type};
+            Cursor c = db.query(
+                    ProjectsTable.TABLE_NAME,
+                    columns,
+                    selection,
+                    selectionArgs,
+                    null,
+                    null,
+                    null);
+
+            while (c.moveToNext()) {
+                list.add(new ProjectsContract().Hydrate(c));
+            }
+        }
+
+        return list;
     }
 }

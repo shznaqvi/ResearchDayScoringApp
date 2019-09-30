@@ -15,6 +15,7 @@ public class MainApp extends Application {
     public static final String _HOST_URL_1 = "http://" + MainApp._IP + ":" + MainApp._PORT + "/researchday/api/";
     public static FinalScoreContract fsc;
     public static String userName = "0000";
+    public static String projIDs = "";
 
 
 }

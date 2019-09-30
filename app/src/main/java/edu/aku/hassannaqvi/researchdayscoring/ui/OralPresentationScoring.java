@@ -85,7 +85,7 @@ public class OralPresentationScoring extends AppCompatActivity {
 
     private void gettingDataFromDB(String projID) {
         DatabaseHelper db = new DatabaseHelper(this);
-        contract = db.getProject(projID, "2");
+        contract = db.getSingleProject(projID, "2");
         if (contract.getTitle() != null) {
             init();
             dialog.dismiss();

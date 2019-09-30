@@ -20,6 +20,15 @@ public class ProjectsContract {
     private String title;
     private String abstracts;
     private String type;
+    private boolean isExpanded;
+
+    public boolean isExpanded() {
+        return isExpanded;
+    }
+
+    public void setExpanded(boolean expanded) {
+        isExpanded = expanded;
+    }
 
     public String getProj_id() {
         return proj_id;
@@ -28,7 +37,6 @@ public class ProjectsContract {
     public void setProj_id(String proj_id) {
         this.proj_id = proj_id;
     }
-
 
 
     public ProjectsContract() {
