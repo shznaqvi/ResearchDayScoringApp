@@ -23,6 +23,24 @@ public class FinalScoreContract {
     private String score;
     private String synced;
     private String sycnedDate;
+    private String deviceid;
+    private String formdate;
+
+    public String getDeviceid() {
+        return deviceid;
+    }
+
+    public void setDeviceid(String deviceid) {
+        this.deviceid = deviceid;
+    }
+
+    public String getFormdate() {
+        return formdate;
+    }
+
+    public void setFormdate(String formdate) {
+        this.formdate = formdate;
+    }
 
     public String getContent() {
         return content;
@@ -132,6 +150,7 @@ public class FinalScoreContract {
     }
 
     public FinalScoreContract Hydrate(Cursor cursor) {
+        this.id = cursor.getString(cursor.getColumnIndex(singleColumn._ID));
         this.proj_id = cursor.getString(cursor.getColumnIndex(singleColumn.COLUMN_PROJECT_ID));
         this.author = cursor.getString(cursor.getColumnIndex(singleColumn.COLUMN_AUTHOR));
         this.theme = cursor.getString(cursor.getColumnIndex(singleColumn.COLUMN_THEME));
@@ -143,6 +162,8 @@ public class FinalScoreContract {
         this.content = cursor.getString(cursor.getColumnIndex(singleColumn.COLUMN_CONTENT));
         this.synced = cursor.getString(cursor.getColumnIndex(singleColumn.COLUMN_SYNCED));
         this.sycnedDate = cursor.getString(cursor.getColumnIndex(singleColumn.COLUMN_SYNCED_DATE));
+        this.deviceid = cursor.getString(cursor.getColumnIndex(singleColumn.DEVICEID));
+        this.formdate = cursor.getString(cursor.getColumnIndex(singleColumn.FORMDATE));
         return this;
 
     }
@@ -162,13 +183,17 @@ public class FinalScoreContract {
         json.put(singleColumn.COLUMN_JUDGE, this.judgeName == null ? JSONObject.NULL : this.judgeName);
         json.put(singleColumn.COLUMN_SYNCED, this.synced == null ? JSONObject.NULL : this.synced);
         json.put(singleColumn.COLUMN_SYNCED_DATE, this.sycnedDate == null ? JSONObject.NULL : this.sycnedDate);
+        json.put(singleColumn.DEVICEID, this.deviceid == null ? JSONObject.NULL : this.deviceid);
+        json.put(singleColumn.FORMDATE, this.formdate == null ? JSONObject.NULL : this.formdate);
         return json;
     }
 
     public static abstract class singleColumn implements BaseColumns {
 
         public static final String TABLE_NAME = "final_score";
-        public static final String _ID = "id";
+        public static final String _ID = "_id";
+        public static final String DEVICEID = "deviceid";
+        public static final String FORMDATE = "formdate";
         public static final String COLUMN_PROJECT_ID = "proj_id";
         public static final String COLUMN_JUDGE = "judge";
         public static final String COLUMN_SCORE = "score";

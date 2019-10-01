@@ -59,6 +59,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String SQL_CREATE_FINAL_SCORE = "CREATE TABLE " + singleColumn.TABLE_NAME + "("
             + singleColumn._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + singleColumn.COLUMN_PROJECT_ID + " TEXT,"
+            + singleColumn.DEVICEID + " TEXT,"
+            + singleColumn.FORMDATE + " TEXT,"
             + singleColumn.COLUMN_TITLE + " TEXT,"
             + singleColumn.COLUMN_AUTHOR + " TEXT,"
             + singleColumn.COLUMN_THEME + " TEXT,"
@@ -150,6 +152,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(singleColumn.COLUMN_TITLE, fc.getTitle());
         values.put(singleColumn.COLUMN_TYPE, fc.getType());
         values.put(singleColumn.COLUMN_CONTENT, fc.getContent());
+        values.put(singleColumn.DEVICEID, fc.getDeviceid());
+        values.put(singleColumn.FORMDATE, fc.getFormdate());
 
 
         // Insert the new row, returning the primary key value of the new row
@@ -197,6 +201,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + singleColumn.COLUMN_SYNCED + " TEXT,"
             + singleColumn.COLUMN_SYNCED_DATE + " TEXT"
                  */
+                singleColumn._ID,
                 singleColumn.COLUMN_PROJECT_ID,
                 singleColumn.COLUMN_TITLE,
                 singleColumn.COLUMN_AUTHOR,
@@ -208,6 +213,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 singleColumn.COLUMN_SCORE,
                 singleColumn.COLUMN_SYNCED,
                 singleColumn.COLUMN_SYNCED_DATE,
+                singleColumn.DEVICEID,
+                singleColumn.FORMDATE,
 
 
         };
