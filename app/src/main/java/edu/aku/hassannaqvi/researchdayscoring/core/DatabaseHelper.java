@@ -15,6 +15,7 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -177,6 +178,76 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 whereArgs);
     }
 
+    public Collection<FinalScoreContract> getUnsyncedForms(String type) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = null;
+        String[] columns = {
+
+                /*
+                 + singleColumn._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + singleColumn.COLUMN_PROJECT_ID + " TEXT,"
+            + singleColumn.COLUMN_TITLE + " TEXT,"
+            + singleColumn.COLUMN_AUTHOR + " TEXT,"
+            + singleColumn.COLUMN_THEME + " TEXT,"
+            + singleColumn.COLUMN_TYPE + " TEXT,"
+            + singleColumn.COLUMN_ABSTRACTS + " TEXT,"
+            + singleColumn.COLUMN_JUDGE + " TEXT,"
+            + singleColumn.COLUMN_CONTENT + " TEXT,"
+            + singleColumn.COLUMN_SCORE + " TEXT,"
+            + singleColumn.COLUMN_SYNCED + " TEXT,"
+            + singleColumn.COLUMN_SYNCED_DATE + " TEXT"
+                 */
+                singleColumn.COLUMN_PROJECT_ID,
+                singleColumn.COLUMN_TITLE,
+                singleColumn.COLUMN_AUTHOR,
+                singleColumn.COLUMN_THEME,
+                singleColumn.COLUMN_TYPE,
+                singleColumn.COLUMN_ABSTRACTS,
+                singleColumn.COLUMN_JUDGE,
+                singleColumn.COLUMN_CONTENT,
+                singleColumn.COLUMN_SCORE,
+                singleColumn.COLUMN_SYNCED,
+                singleColumn.COLUMN_SYNCED_DATE,
+
+
+        };
+        String whereClause = singleColumn.COLUMN_SYNCED + " is null OR " + singleColumn.COLUMN_SYNCED + " = ''  AND " + singleColumn.COLUMN_TYPE + "= ?";
+        String[] whereArgs = {type};
+        String groupBy = null;
+        String having = null;
+
+        String orderBy =
+                singleColumn._ID + " ASC";
+
+        Collection<FinalScoreContract> allFC = new ArrayList<FinalScoreContract>();
+        try {
+            c = db.query(
+                    singleColumn.TABLE_NAME,  // The table to query
+                    columns,                   // The columns to return
+                    whereClause,               // The columns for the WHERE clause
+                    whereArgs,                 // The values for the WHERE clause
+                    groupBy,                   // don't group the rows
+                    having,                    // don't filter by row groups
+                    orderBy                    // The sort order
+            );
+
+            if (c.moveToFirst())
+                do {
+                    FinalScoreContract fc = new FinalScoreContract();
+                    allFC.add(fc.Hydrate(c));
+                } while (c.moveToNext());
+
+
+        } finally {
+            if (c != null) {
+                c.close();
+            }
+            if (db != null) {
+                db.close();
+            }
+        }
+        return allFC;
+    }
 
     public void syncUser(JSONArray userlist) {
         SQLiteDatabase db = this.getWritableDatabase();

@@ -29,10 +29,13 @@ import java.util.List;
 
 import edu.aku.hassannaqvi.researchdayscoring.adapter.SyncListAdapter;
 import edu.aku.hassannaqvi.researchdayscoring.adapter.Upload_list_adapter;
+import edu.aku.hassannaqvi.researchdayscoring.contracts.FinalScoreContract;
 import edu.aku.hassannaqvi.researchdayscoring.core.DatabaseHelper;
+import edu.aku.hassannaqvi.researchdayscoring.core.MainApp;
 import edu.aku.hassannaqvi.researchdayscoring.databinding.ActivitySyncBinding;
 import edu.aku.hassannaqvi.researchdayscoring.get.GetAllData;
 import edu.aku.hassannaqvi.researchdayscoring.model.SyncModel;
+import edu.aku.hassannaqvi.researchdayscoring.sync.SyncAllData;
 
 public class SyncActivity extends AppCompatActivity {
     SharedPreferences.Editor editor;
@@ -133,41 +136,33 @@ public class SyncActivity extends AppCompatActivity {
         if (networkInfo != null && networkInfo.isConnected()) {
 
             DatabaseHelper db = new DatabaseHelper(this);
-
-//            new SyncDevice(this, false).execute();
-////            Toast.makeText(getApplicationContext(), "Syncing Forms", Toast.LENGTH_SHORT).show();
-//            if (uploadlistActivityCreated) {
-//                uploadmodel = new SyncModel();
-//                uploadmodel.setstatusID(0);
-//                uploadlist.add(uploadmodel);
-//            }
             if (uploadlistActivityCreated) {
                 uploadmodel = new SyncModel();
                 uploadmodel.setstatusID(0);
                 uploadlist.add(uploadmodel);
             }
-//            new SyncAllData(
-//                    this,
-//                    "Forms",
-//                    "updateSyncedForms",
-//                    FormsContract.class,
-//                    MainApp._HOST_URL + FormsContract.FormsTable._URL,
-//                    db.getUnsyncedForms(), 0, uploadListAdapter, uploadlist
-//            ).execute();
-//            if (uploadlistActivityCreated) {
-//                uploadmodel = new SyncModel();
-//                uploadmodel.setstatusID(0);
-//                uploadlist.add(uploadmodel);
-//            }
-//            new SyncAllData(
-//                    this,
-//                    "Family Members",
-//                    "updateSyncedFamilyMembers",
-//                    FormsContract.class,
-//                    MainApp._HOST_URL + FamilyMembersContract.familyMembers._URL,
-//                    db.getUnsyncedFamilyMember(), 1, uploadListAdapter, uploadlist
-//            ).execute();
-//            uploadlistActivityCreated = false;
+            new SyncAllData(
+                    this,
+                    "Posters",
+                    "updateSyncedForms",
+                    FinalScoreContract.class,
+                    MainApp._HOST_URL_1 + FinalScoreContract.singleColumn._URL1,
+                    db.getUnsyncedForms("2"), 0, uploadListAdapter, uploadlist
+            ).execute();
+            if (uploadlistActivityCreated) {
+                uploadmodel = new SyncModel();
+                uploadmodel.setstatusID(0);
+                uploadlist.add(uploadmodel);
+            }
+            new SyncAllData(
+                    this,
+                    "Presentations",
+                    "updateSyncedForms",
+                    FinalScoreContract.class,
+                    MainApp._HOST_URL_1 + FinalScoreContract.singleColumn._URL2,
+                    db.getUnsyncedForms("1"), 1, uploadListAdapter, uploadlist
+            ).execute();
+            uploadlistActivityCreated = false;
 
             SharedPreferences syncPref = getSharedPreferences("SyncInfo", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = syncPref.edit();

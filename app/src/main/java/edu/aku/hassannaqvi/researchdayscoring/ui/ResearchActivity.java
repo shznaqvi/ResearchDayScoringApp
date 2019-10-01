@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import edu.aku.hassannaqvi.researchdayscoring.R;
+import edu.aku.hassannaqvi.researchdayscoring.SyncActivity;
 import edu.aku.hassannaqvi.researchdayscoring.core.AndroidDatabaseManager;
 
 public class ResearchActivity extends AppCompatActivity {
@@ -52,14 +53,14 @@ public class ResearchActivity extends AppCompatActivity {
                         startActivity(new Intent(ResearchActivity.this, AllPresProjectsActivity.class).putExtra("type", "2"));
                         dl.closeDrawer(GravityCompat.START);
                         break;
-//                    case R.id.poster_scores:
-//                        startActivity(new Intent(ResearchActivity.this, PosterScoring.class));
-//                        dl.closeDrawer(GravityCompat.START);
-//                        break;
-//                    case R.id.presentation_scores:
-//                        startActivity(new Intent(ResearchActivity.this, OralPresentationScoring.class));
-//                        dl.closeDrawer(GravityCompat.START);
-//                        break;
+                    case R.id.syncData:
+                        startActivity(new Intent(ResearchActivity.this, SyncActivity.class));
+                        dl.closeDrawer(GravityCompat.START);
+                        break;
+                    case R.id.databaseManager:
+                        startActivity(new Intent(ResearchActivity.this, AndroidDatabaseManager.class));
+                        dl.closeDrawer(GravityCompat.START);
+                        break;
                     default:
                         return true;
                 }

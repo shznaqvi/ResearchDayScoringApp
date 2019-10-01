@@ -12,18 +12,18 @@
         android:textSize="48sp"
         android:title="Posters" />
 
-    <!--    <group>-->
-    <!--        <item android:title="Scores"></item>-->
-    <!--        <menu>-->
-    <!--            <item-->
-    <!--                android:id="@+id/poster_scores"-->
-    <!--                android:icon="@drawable/ic_poster_black_24dp"-->
-    <!--                android:title="Poster Scores" />-->
-    <!--            <item-->
-    <!--                android:id="@+id/presentation_scores"-->
-    <!--                android:icon="@drawable/ic_presentation_black_24dp"-->
-    <!--                android:title="Presentation Scores" />-->
+    <group>
+        <item android:title="Sync"></item>
+        <menu>
+            <item
+                android:id="@+id/syncData"
+                android:icon="@drawable/ic_poster_black_24dp"
+                android:title="Sync Data" />
+            <item
+                android:id="@+id/databaseManager"
+                android:icon="@drawable/ic_presentation_black_24dp"
+                android:title="Database Manager" />
 
-    <!--        </menu>-->
-    <!--    </group>-->
+        </menu>
+    </group>
 </menu>
