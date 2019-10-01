@@ -13,7 +13,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.AllPosterProjectsActivity"></activity>
         <activity android:name=".ui.AllPresProjectsActivity" />
         <activity
             android:name=".ui.SplashScreenActivity"
@@ -27,9 +26,6 @@
         <activity
             android:name=".ui.LoginActivity"
             android:theme="@style/AppTheme1" />
-        <activity
-            android:name=".ui.PosterScoring"
-            android:label="@string/title_activity_poster_scoring" />
         <activity android:name=".SyncActivity" />
         <activity
             android:name=".ui.OralPresentationScoring"
@@ -39,8 +35,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.aku.hassannaqvi.researchdayscoring.ui.ResearchActivity" />
         </activity>
-        <activity android:name=".ui.OralPresentationAbstracts" />
-        <activity android:name=".ui.PosterAbstracts" />
         <activity android:name=".ui.EndingActivity" />
         <activity
             android:name=".ui.ResearchActivity"

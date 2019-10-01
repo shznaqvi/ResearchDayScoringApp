@@ -1,6 +1,8 @@
 package edu.aku.hassannaqvi.researchdayscoring.contracts;
 
 import android.database.Cursor;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.provider.BaseColumns;
 
 import org.json.JSONException;
@@ -10,7 +12,7 @@ import org.json.JSONObject;
  * Created by hassan.naqvi on 11/30/2016.
  */
 
-public class ProjectsContract {
+public class ProjectsContract implements Parcelable {
 
     private static final String TAG = "PROJECTS_CONTRACT";
     private String id;
@@ -21,6 +23,29 @@ public class ProjectsContract {
     private String abstracts;
     private String type;
     private boolean isExpanded;
+
+    public static final Creator<ProjectsContract> CREATOR = new Creator<ProjectsContract>() {
+        @Override
+        public ProjectsContract createFromParcel(Parcel in) {
+            return new ProjectsContract(in);
+        }
+
+        @Override
+        public ProjectsContract[] newArray(int size) {
+            return new ProjectsContract[size];
+        }
+    };
+
+    protected ProjectsContract(Parcel in) {
+        id = in.readString();
+        proj_id = in.readString();
+        author = in.readString();
+        theme = in.readString();
+        title = in.readString();
+        abstracts = in.readString();
+        type = in.readString();
+        isExpanded = in.readByte() != 0;
+    }
 
     public boolean isExpanded() {
         return isExpanded;
@@ -124,6 +149,23 @@ public class ProjectsContract {
         json.put(ProjectsTable.COLUMN_ABSTRACTS, this.abstracts == null ? JSONObject.NULL : this.abstracts);
         json.put(ProjectsTable.COLUMN_TYPE, this.type == null ? JSONObject.NULL : this.type);
         return json;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(proj_id);
+        dest.writeString(author);
+        dest.writeString(theme);
+        dest.writeString(title);
+        dest.writeString(abstracts);
+        dest.writeString(type);
+        dest.writeByte((byte) (isExpanded ? 1 : 0));
     }
 
     public static abstract class ProjectsTable implements BaseColumns {

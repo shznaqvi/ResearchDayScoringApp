@@ -23,7 +23,12 @@ public class AllProjectListAdapter extends RecyclerView.Adapter<AllProjectListAd
 
     Context context;
     List<ProjectsContract> list;
-    int[] colors = {Color.CYAN, Color.RED, Color.GREEN, Color.MAGENTA, Color.BLUE};
+
+    OnItemClickListener clickListener;
+
+    public void setClickListener(OnItemClickListener clickListener) {
+        this.clickListener = clickListener;
+    }
 
     public AllProjectListAdapter(Context context, List<ProjectsContract> list) {
         this.list = list;
@@ -51,13 +56,20 @@ public class AllProjectListAdapter extends RecyclerView.Adapter<AllProjectListAd
             holder.bi.viewMoreBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     boolean show = toggleLayout(!list.get(i).isExpanded(), v, holder.bi.layoutExpand);
                     list.get(i).setExpanded(show);
                     holder.bi.authorName.setText(list.get(i).getAuthor());
                     holder.bi.projectAbstract.setText(list.get(i).getAbstract());
                     holder.bi.projectTheme.setText(list.get(i).getTheme());
 
+                }
+            });
+
+            holder.bi.parent.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    clickListener.OnItemClick(list.get(i));
                 }
             });
         }
@@ -90,6 +102,10 @@ public class AllProjectListAdapter extends RecyclerView.Adapter<AllProjectListAd
 
             bi = itemView;
         }
+    }
+
+    public interface OnItemClickListener {
+        void OnItemClick(ProjectsContract contract);
     }
 
 }

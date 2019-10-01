@@ -88,7 +88,7 @@ public class PresentationScoringAdapter extends RecyclerView.Adapter<RecyclerVie
             vh.bi.pointsPlus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (list.get(pos).score <= 4) {
+                    if (list.get(pos).score <= 3) {
                         vh.bi.counterText.setText(String.valueOf(++list.get(pos).score));
 
 

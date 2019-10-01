@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -25,10 +25,10 @@
 
             <RelativeLayout
                 android:id="@+id/titlebg"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:background="@drawable/circle_image"
-                android:backgroundTint="@color/blue">
+                android:backgroundTint="@color/colorPrimary">
 
 
                 <TextView
@@ -56,7 +56,7 @@
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
                 android:text="Mutufa Ansari"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textColor="#37474F" />
 
             <View
@@ -85,24 +85,38 @@
             android:layout_below="@id/parent"
             android:background="#f7f7f7"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="gone"
+            tools:visibility="visible">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:text="Author"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/authorName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="10dp"
-                android:text="Mustufa Ansari"
-                android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
+                <ImageButton
+                    android:layout_width="?attr/actionBarSize"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="10dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_person"
+                    android:tint="@color/blue" />
+
+                <TextView
+                    android:id="@+id/authorName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:text="Mustufa Ansari"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+
+            </LinearLayout>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -110,46 +124,72 @@
                 android:background="#f2f2f2" />
 
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:text="Theme"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textColor="@android:color/black" />
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/projectTheme"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="10dp"
-                android:text="Mustufa Ansari"
-                android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
+                <ImageButton
+                    android:layout_width="?attr/actionBarSize"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="10dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_video"
+                    android:tint="@color/blue" />
+
+                <TextView
+                    android:id="@+id/projectTheme"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:text="Project Theme"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+
+            </LinearLayout>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="5dp"
                 android:background="#f2f2f2" />
 
-
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:text="Abstract"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textColor="@android:color/black" />
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/projectAbstract"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="10dp"
-                android:text="@string/lorem"
-                android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+                <ImageButton
+                    android:layout_width="?attr/actionBarSize"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="10dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_book"
+                    android:tint="@color/blue" />
+
+                <TextView
+                    android:id="@+id/projectAbstract"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/lorem"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+
+            </LinearLayout>
+
 
         </LinearLayout>
 

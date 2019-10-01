@@ -16,6 +16,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import edu.aku.hassannaqvi.researchdayscoring.R;
+import edu.aku.hassannaqvi.researchdayscoring.adapter.PosterScoringAdapter;
 import edu.aku.hassannaqvi.researchdayscoring.adapter.PresentationScoringAdapter;
 import edu.aku.hassannaqvi.researchdayscoring.contracts.FinalScoreContract;
 import edu.aku.hassannaqvi.researchdayscoring.contracts.ProjectsContract;
@@ -25,6 +26,7 @@ import edu.aku.hassannaqvi.researchdayscoring.databinding.ActivityOralPresentati
 import edu.aku.hassannaqvi.researchdayscoring.databinding.CustomDialogLayoutBinding;
 import edu.aku.hassannaqvi.researchdayscoring.databinding.DialogLayoutBinding;
 import edu.aku.hassannaqvi.researchdayscoring.model.Data;
+import edu.aku.hassannaqvi.researchdayscoring.model.Poster;
 import edu.aku.hassannaqvi.researchdayscoring.model.Presentation;
 
 
@@ -34,102 +36,78 @@ public class OralPresentationScoring extends AppCompatActivity {
     private static final String TAG = "OralPresentationScoring";
     ActivityOralPresentationScoringBinding bi;
     PresentationScoringAdapter adapter;
+    PosterScoringAdapter adapter1;
     ProjectsContract contract;
     ArrayList<Presentation> list;
+    ArrayList<Poster> list1;
     DecimalFormat formatter = new DecimalFormat("00");
     AlertDialog dialog;
-
+    ArrayList<Poster> posters;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         bi = DataBindingUtil.setContentView(this, R.layout.activity_oral_presentation_scoring);
-        OpeningDialog();
+
+        contract = getIntent().getParcelableExtra("data");
+
+        init();
 
     }
-
-    private void OpeningDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        View view = LayoutInflater.from(this).inflate(R.layout.dialog_layout, null);
-        builder.setView(view);
-        final DialogLayoutBinding binding = DataBindingUtil.bind(view);
-        dialog = builder.create();
-        dialog.show();
-        assert binding != null;
-        binding.enterProjectIdBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (!binding.etProjectID.getText().toString().equals("")) {
-
-                    String projID = binding.etProjectID.getText().toString();
-                    gettingDataFromDB(projID);
-                    dialog.dismiss();
-
-                }
-
-            }
-        });
-
-        binding.cancelBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                dialog.dismiss();
-                finish();
-            }
-        });
-
-    }
-
-    private void gettingDataFromDB(String projID) {
-        DatabaseHelper db = new DatabaseHelper(this);
-        contract = db.getSingleProject(projID, "2");
-        if (contract.getTitle() != null) {
-            init();
-            dialog.dismiss();
-        } else {
-            Toast.makeText(this, "Data not found", Toast.LENGTH_SHORT).show();
-        }
-
-
-    }
-
 
     private void init() {
-        bi.dashboardLayout.setVisibility(View.VISIBLE);
-        bi.posterContent.setVisibility(View.VISIBLE);
-        bi.submitBtn.setVisibility(View.VISIBLE);
         bi.authorName.setText(contract.getAuthor());
-        bi.ProjectTitle.setText(contract.getTitle());
-        bi.ProjectTheme.setText(contract.getTheme());
-        ArrayList<Presentation> items = new ArrayList<>();
-        ArrayList<String> sectionName = new ArrayList<>();
+        bi.projectTheme.setText(contract.getTheme());
+        bi.projectAbstract.setText(contract.getAbstract());
+        if (contract.getType().equals("1")) {
+            ArrayList<Presentation> items = new ArrayList<>();
+            items = Data.getPresentationItems(this);
+            adapter = new PresentationScoringAdapter(this, items);
+            bi.posterContent.setLayoutManager(new LinearLayoutManager(this));
+            bi.posterContent.setHasFixedSize(true);
+            bi.posterContent.setAdapter(adapter);
 
-        items = Data.getPresentationItems(this);
-        adapter = new PresentationScoringAdapter(this, items);
-        bi.posterContent.setLayoutManager(new LinearLayoutManager(this));
-        bi.posterContent.setHasFixedSize(true);
-        bi.posterContent.setAdapter(adapter);
+            list = new ArrayList<>();
 
-        list = new ArrayList<>();
+            bi.submitBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (list.size() > 0) list.clear();
+                    for (int i = 0; i < adapter.getList().size() - 2; i++) {
 
-        bi.submitBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (list.size() > 0) list.clear();
-                for (int i = 0; i < adapter.getList().size() - 2; i++) {
-
-                    if (!adapter.getList().get(i).isSection) {
-                        if (adapter.getList().get(i).score > 0) {
-                            list.add(adapter.getList().get(i));
+                        if (!adapter.getList().get(i).isSection) {
+                            if (adapter.getList().get(i).score > 0) {
+                                list.add(adapter.getList().get(i));
+                            }
                         }
                     }
+                    openDialog();
                 }
-                openDialog();
-            }
-        });
+            });
+
+        } else {
+            ArrayList<Poster> items = new ArrayList<>();
+            posters = new ArrayList<>();
+            items = Data.getPosterItems(this);
+            adapter1 = new PosterScoringAdapter(this, items);
+            bi.posterContent.setLayoutManager(new LinearLayoutManager(this));
+            bi.posterContent.setHasFixedSize(true);
+            bi.posterContent.setAdapter(adapter1);
+            list1 = new ArrayList<>();
+            bi.submitBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (list1.size() > 0) list1.clear();
+                    for (int i = 0; i < adapter1.getList().size(); i++) {
+                        if (!adapter1.getList().get(i).isSection) {
+                            list1.add(adapter1.getList().get(i));
+                        }
+                    }
+                    openDialog();
+                }
+            });
+
+        }
 
 
     }
@@ -196,9 +174,9 @@ public class OralPresentationScoring extends AppCompatActivity {
         JSONObject object = new JSONObject();
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).isComment) {
-                object.put("pres" + formatter.format(i + 1), list.get(i).comment);
+                object.put(contract.getType().equals("1") ? "pres" : "pos" + formatter.format(i + 1), contract.getType().equals("1") ? list.get(i).comment : list1.get(i).comment);
             } else {
-                object.put("pres" + formatter.format(i + 1), list.get(i).score);
+                object.put(contract.getType().equals("1") ? "pres" : "pos" + formatter.format(i + 1), contract.getType().equals("1") ? list.get(i).score : list1.get(i).score);
                 score += list.get(i).score;
             }
 

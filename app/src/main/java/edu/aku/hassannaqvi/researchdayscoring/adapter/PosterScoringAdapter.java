@@ -26,8 +26,6 @@ public class PosterScoringAdapter extends RecyclerView.Adapter<RecyclerView.View
     private final int VIEW_COMMENT = 2;
     Context context;
     ArrayList<Poster> list;
-    int points = 5;
-    int initPoint = 1;
 
 
     public PosterScoringAdapter(Context context, ArrayList<Poster> list) {

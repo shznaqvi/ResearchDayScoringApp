@@ -45,19 +45,21 @@ public class ResearchActivity extends AppCompatActivity {
                 int id = item.getItemId();
                 switch (id) {
                     case R.id.allPresProjects:
-                        startActivity(new Intent(ResearchActivity.this, AllPresProjectsActivity.class));
+                        startActivity(new Intent(ResearchActivity.this, AllPresProjectsActivity.class).putExtra("type", "1"));
+                        dl.closeDrawer(GravityCompat.START);
                         break;
                     case R.id.allPosProjects:
-                        startActivity(new Intent(ResearchActivity.this, AndroidDatabaseManager.class));
-                        break;
-                    case R.id.poster_scores:
-                        startActivity(new Intent(ResearchActivity.this, PosterScoring.class));
+                        startActivity(new Intent(ResearchActivity.this, AllPresProjectsActivity.class).putExtra("type", "2"));
                         dl.closeDrawer(GravityCompat.START);
                         break;
-                    case R.id.presentation_scores:
-                        startActivity(new Intent(ResearchActivity.this, OralPresentationScoring.class));
-                        dl.closeDrawer(GravityCompat.START);
-                        break;
+//                    case R.id.poster_scores:
+//                        startActivity(new Intent(ResearchActivity.this, PosterScoring.class));
+//                        dl.closeDrawer(GravityCompat.START);
+//                        break;
+//                    case R.id.presentation_scores:
+//                        startActivity(new Intent(ResearchActivity.this, OralPresentationScoring.class));
+//                        dl.closeDrawer(GravityCompat.START);
+//                        break;
                     default:
                         return true;
                 }

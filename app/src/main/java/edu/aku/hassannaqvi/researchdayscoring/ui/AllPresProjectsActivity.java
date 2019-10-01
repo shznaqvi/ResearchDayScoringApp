@@ -1,9 +1,12 @@
 package edu.aku.hassannaqvi.researchdayscoring.ui;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -21,6 +24,7 @@ public class AllPresProjectsActivity extends AppCompatActivity {
     DatabaseHelper db;
     List<ProjectsContract> list;
     AllProjectListAdapter adapter;
+    String projType = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,18 +32,45 @@ public class AllPresProjectsActivity extends AppCompatActivity {
 
         bi = DataBindingUtil.setContentView(this, R.layout.activity_all_projects);
 
+
+        projType = getIntent().getStringExtra("type");
+        this.setTitle(projType.equals("1") ? "All Presentation" : "All Posters Presentation");
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
         init();
     }
 
     private void init() {
 
         db = new DatabaseHelper(this);
-        list = db.getAllProject(MainApp.projIDs, "1");
+        list = db.getAllProject(MainApp.projIDs, projType);
         adapter = new AllProjectListAdapter(this, list);
         bi.allProjects.setLayoutManager(new LinearLayoutManager(this));
         bi.allProjects.setHasFixedSize(true);
         bi.allProjects.setAdapter(adapter);
 
 
+        adapter.setClickListener(new AllProjectListAdapter.OnItemClickListener() {
+            @Override
+            public void OnItemClick(ProjectsContract contract) {
+
+                startActivity(new Intent(AllPresProjectsActivity.this, OralPresentationScoring.class).putExtra("data", contract));
+
+            }
+        });
+
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return true;
     }
 }
