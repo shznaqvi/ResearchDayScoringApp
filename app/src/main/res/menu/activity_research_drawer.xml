@@ -11,18 +11,13 @@
         android:icon="@drawable/ic_poster_black_24dp"
         android:textSize="48sp"
         android:title="Posters" />
+    <item
+        android:id="@+id/syncData"
+        android:icon="@drawable/ic_poster_black_24dp"
+        android:title="Sync Data" />
 
-    <group>
-        <menu>
-            <item
-                android:id="@+id/syncData"
-                android:icon="@drawable/ic_poster_black_24dp"
-                android:title="Sync Data" />
-            <item
-                android:id="@+id/databaseManager"
-                android:icon="@drawable/ic_presentation_black_24dp"
-                android:title="Database Manager" />
-
-        </menu>
-    </group>
+    <!--    <item-->
+    <!--        android:id="@+id/databaseManager"-->
+    <!--        android:icon="@drawable/ic_presentation_black_24dp"-->
+    <!--        android:title="Database Manager" />-->
 </menu>
