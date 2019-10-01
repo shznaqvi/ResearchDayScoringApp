@@ -233,7 +233,7 @@ public class SyncActivity extends AppCompatActivity {
                 }
 
             } else {
-                Toast.makeText(this, "Not create folder", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "Not create folder", Toast.LENGTH_SHORT).show();
             }
         }
 

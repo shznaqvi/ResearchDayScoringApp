@@ -8,12 +8,12 @@
         android:title="Presentations" />
     <item
         android:id="@+id/allPosProjects"
-        android:icon="@drawable/ic_poster_black_24dp"
+        android:icon="@drawable/ic_video"
         android:textSize="48sp"
         android:title="Posters" />
     <item
         android:id="@+id/syncData"
-        android:icon="@drawable/ic_poster_black_24dp"
+        android:icon="@drawable/ic_upload"
         android:title="Sync Data" />
 
     <!--    <item-->

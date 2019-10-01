@@ -133,7 +133,7 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     bi.passowrd.setError(getString(R.string.error_incorrect_password));
                     bi.passowrd.requestFocus();
-                    Toast.makeText(LoginActivity.this, mEmail + " " + mPassword, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(LoginActivity.this, mEmail + " " + mPassword, Toast.LENGTH_SHORT).show();
                     showProgress(false);
                 }
             } else {
