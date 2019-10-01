@@ -141,7 +141,7 @@ public class FinalScoreContract {
         this.author = jsonObject.getString(singleColumn.COLUMN_AUTHOR);
         this.proj_id = jsonObject.getString(singleColumn.COLUMN_PROJECT_ID);
         this.theme = jsonObject.getString(singleColumn.COLUMN_THEME);
-        this.title = jsonObject.getString(singleColumn.COLUMN_TITLE);
+//        this.title = jsonObject.getString(singleColumn.COLUMN_TITLE);
         this.abstracts = jsonObject.getString(singleColumn.COLUMN_ABSTRACTS);
         this.type = jsonObject.getString(singleColumn.COLUMN_TYPE);
         this.content = jsonObject.getString(singleColumn.COLUMN_CONTENT);
@@ -154,7 +154,7 @@ public class FinalScoreContract {
         this.proj_id = cursor.getString(cursor.getColumnIndex(singleColumn.COLUMN_PROJECT_ID));
         this.author = cursor.getString(cursor.getColumnIndex(singleColumn.COLUMN_AUTHOR));
         this.theme = cursor.getString(cursor.getColumnIndex(singleColumn.COLUMN_THEME));
-        this.title = cursor.getString(cursor.getColumnIndex(singleColumn.COLUMN_TITLE));
+//        this.title = cursor.getString(cursor.getColumnIndex(singleColumn.COLUMN_TITLE));
         this.abstracts = cursor.getString(cursor.getColumnIndex(singleColumn.COLUMN_ABSTRACTS));
         this.type = cursor.getString(cursor.getColumnIndex(singleColumn.COLUMN_TYPE));
         this.judgeName = cursor.getString(cursor.getColumnIndex(singleColumn.COLUMN_JUDGE));
@@ -176,7 +176,7 @@ public class FinalScoreContract {
         json.put(singleColumn.COLUMN_PROJECT_ID, this.proj_id == null ? JSONObject.NULL : this.proj_id);
         json.put(singleColumn.COLUMN_AUTHOR, this.author == null ? JSONObject.NULL : this.author);
         json.put(singleColumn.COLUMN_THEME, this.theme == null ? JSONObject.NULL : this.theme);
-        json.put(singleColumn.COLUMN_TITLE, this.title == null ? JSONObject.NULL : this.title);
+//        json.put(singleColumn.COLUMN_TITLE, this.title == null ? JSONObject.NULL : this.title);
         json.put(singleColumn.COLUMN_ABSTRACTS, this.abstracts == null ? JSONObject.NULL : this.abstracts);
         json.put(singleColumn.COLUMN_TYPE, this.type == null ? JSONObject.NULL : this.type);
         json.put(singleColumn.COLUMN_SCORE, this.score == null ? JSONObject.NULL : this.score);
@@ -200,7 +200,7 @@ public class FinalScoreContract {
         public static final String COLUMN_CONTENT = "content";
         public static final String COLUMN_AUTHOR = "proj_author";
         public static final String COLUMN_THEME = "proj_theme";
-        public static final String COLUMN_TITLE = "proj_title";
+        //        public static final String COLUMN_TITLE = "proj_title";
         public static final String COLUMN_ABSTRACTS = "proj_abstract";
         public static final String COLUMN_TYPE = "proj_type";
         public static final String COLUMN_SYNCED = "synced";

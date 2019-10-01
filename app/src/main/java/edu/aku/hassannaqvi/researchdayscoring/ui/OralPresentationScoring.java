@@ -191,7 +191,7 @@ public class OralPresentationScoring extends AppCompatActivity {
         MainApp.fsc.setAbstract(contract.getAbstract());
         MainApp.fsc.setAuthor(contract.getAuthor());
         MainApp.fsc.setProj_id(contract.getProj_id());
-        MainApp.fsc.setTitle(contract.getTitle());
+//        MainApp.fsc.setTitle(contract.getTitle());
         MainApp.fsc.setType(contract.getType());
         MainApp.fsc.setTheme(contract.getTheme());
         MainApp.fsc.setDeviceid(Settings.Secure.getString(getApplicationContext().getContentResolver(),

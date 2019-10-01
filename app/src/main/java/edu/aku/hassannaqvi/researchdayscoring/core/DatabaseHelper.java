@@ -61,7 +61,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + singleColumn.COLUMN_PROJECT_ID + " TEXT,"
             + singleColumn.DEVICEID + " TEXT,"
             + singleColumn.FORMDATE + " TEXT,"
-            + singleColumn.COLUMN_TITLE + " TEXT,"
+//            + singleColumn.COLUMN_TITLE + " TEXT,"
             + singleColumn.COLUMN_AUTHOR + " TEXT,"
             + singleColumn.COLUMN_THEME + " TEXT,"
             + singleColumn.COLUMN_TYPE + " TEXT,"
@@ -149,7 +149,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(singleColumn.COLUMN_PROJECT_ID, fc.getProj_id());
         values.put(singleColumn.COLUMN_SCORE, fc.getScore());
         values.put(singleColumn.COLUMN_THEME, fc.getTheme());
-        values.put(singleColumn.COLUMN_TITLE, fc.getTitle());
+//        values.put(singleColumn.COLUMN_TITLE, fc.getTitle());
         values.put(singleColumn.COLUMN_TYPE, fc.getType());
         values.put(singleColumn.COLUMN_CONTENT, fc.getContent());
         values.put(singleColumn.DEVICEID, fc.getDeviceid());
@@ -203,7 +203,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                  */
                 singleColumn._ID,
                 singleColumn.COLUMN_PROJECT_ID,
-                singleColumn.COLUMN_TITLE,
                 singleColumn.COLUMN_AUTHOR,
                 singleColumn.COLUMN_THEME,
                 singleColumn.COLUMN_TYPE,
