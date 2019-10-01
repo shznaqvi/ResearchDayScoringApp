@@ -204,9 +204,9 @@ public class OralPresentationScoring extends AppCompatActivity {
         if (contract.getType().equals("1")) {
             for (int i = 0; i < list.size(); i++) {
                 if (list.get(i).isComment) {
-                    object.put("pres" + formatter.format(i + 1), list.get(i).comment);
+                    object.put("pres_" + formatter.format(i + 1), list.get(i).comment);
                 } else {
-                    object.put("pres" + formatter.format(i + 1), list.get(i).score);
+                    object.put("pres_" + formatter.format(i + 1), list.get(i).score);
                     score += list.get(i).score;
                 }
 
@@ -214,9 +214,9 @@ public class OralPresentationScoring extends AppCompatActivity {
         } else {
             for (int i = 0; i < list1.size(); i++) {
                 if (list1.get(i).isComment) {
-                    object.put("pos" + formatter.format(i + 1), list1.get(i).comment);
+                    object.put("pos_" + formatter.format(i + 1), list1.get(i).comment);
                 } else {
-                    object.put("pos" + formatter.format(i + 1), list1.get(i).score);
+                    object.put("pos_" + formatter.format(i + 1), list1.get(i).score);
                     score += list1.get(i).score;
                 }
 

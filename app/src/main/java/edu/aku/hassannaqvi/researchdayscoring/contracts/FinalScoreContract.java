@@ -195,8 +195,8 @@ public class FinalScoreContract {
         public static final String DEVICEID = "deviceid";
         public static final String FORMDATE = "formdate";
         public static final String COLUMN_PROJECT_ID = "proj_id";
-        public static final String COLUMN_JUDGE = "judge";
-        public static final String COLUMN_SCORE = "score";
+        public static final String COLUMN_JUDGE = "judge_username";
+        public static final String COLUMN_SCORE = "total";
         public static final String COLUMN_CONTENT = "content";
         public static final String COLUMN_AUTHOR = "proj_author";
         public static final String COLUMN_THEME = "proj_theme";
