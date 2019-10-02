@@ -74,15 +74,8 @@ public class AllProjectsActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        Toast.makeText(this, "onResume called", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
     protected void onStart() {
         super.onStart();
-
         init();
     }
 }
