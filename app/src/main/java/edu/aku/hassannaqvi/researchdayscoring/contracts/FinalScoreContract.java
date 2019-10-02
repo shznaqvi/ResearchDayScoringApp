@@ -152,16 +152,16 @@ public class FinalScoreContract {
     public FinalScoreContract Hydrate(Cursor cursor) {
         this.id = cursor.getString(cursor.getColumnIndex(singleColumn._ID));
         this.proj_id = cursor.getString(cursor.getColumnIndex(singleColumn.COLUMN_PROJECT_ID));
-        this.author = cursor.getString(cursor.getColumnIndex(singleColumn.COLUMN_AUTHOR));
-        this.theme = cursor.getString(cursor.getColumnIndex(singleColumn.COLUMN_THEME));
+//        this.author = cursor.getString(cursor.getColumnIndex(singleColumn.COLUMN_AUTHOR));
+//        this.theme = cursor.getString(cursor.getColumnIndex(singleColumn.COLUMN_THEME));
 //        this.title = cursor.getString(cursor.getColumnIndex(singleColumn.COLUMN_TITLE));
-        this.abstracts = cursor.getString(cursor.getColumnIndex(singleColumn.COLUMN_ABSTRACTS));
-        this.type = cursor.getString(cursor.getColumnIndex(singleColumn.COLUMN_TYPE));
+//        this.abstracts = cursor.getString(cursor.getColumnIndex(singleColumn.COLUMN_ABSTRACTS));
+//        this.type = cursor.getString(cursor.getColumnIndex(singleColumn.COLUMN_TYPE));
         this.judgeName = cursor.getString(cursor.getColumnIndex(singleColumn.COLUMN_JUDGE));
         this.score = cursor.getString(cursor.getColumnIndex(singleColumn.COLUMN_SCORE));
         this.content = cursor.getString(cursor.getColumnIndex(singleColumn.COLUMN_CONTENT));
-        this.synced = cursor.getString(cursor.getColumnIndex(singleColumn.COLUMN_SYNCED));
-        this.sycnedDate = cursor.getString(cursor.getColumnIndex(singleColumn.COLUMN_SYNCED_DATE));
+//        this.synced = cursor.getString(cursor.getColumnIndex(singleColumn.COLUMN_SYNCED));
+//        this.sycnedDate = cursor.getString(cursor.getColumnIndex(singleColumn.COLUMN_SYNCED_DATE));
         this.deviceid = cursor.getString(cursor.getColumnIndex(singleColumn.DEVICEID));
         this.formdate = cursor.getString(cursor.getColumnIndex(singleColumn.FORMDATE));
         return this;
@@ -174,15 +174,19 @@ public class FinalScoreContract {
         JSONObject json = new JSONObject();
         json.put(singleColumn._ID, this.id == null ? JSONObject.NULL : this.id);
         json.put(singleColumn.COLUMN_PROJECT_ID, this.proj_id == null ? JSONObject.NULL : this.proj_id);
-        json.put(singleColumn.COLUMN_AUTHOR, this.author == null ? JSONObject.NULL : this.author);
-        json.put(singleColumn.COLUMN_THEME, this.theme == null ? JSONObject.NULL : this.theme);
+//        json.put(singleColumn.COLUMN_AUTHOR, this.author == null ? JSONObject.NULL : this.author);
+//        json.put(singleColumn.COLUMN_THEME, this.theme == null ? JSONObject.NULL : this.theme);
 //        json.put(singleColumn.COLUMN_TITLE, this.title == null ? JSONObject.NULL : this.title);
-        json.put(singleColumn.COLUMN_ABSTRACTS, this.abstracts == null ? JSONObject.NULL : this.abstracts);
-        json.put(singleColumn.COLUMN_TYPE, this.type == null ? JSONObject.NULL : this.type);
+//        json.put(singleColumn.COLUMN_ABSTRACTS, this.abstracts == null ? JSONObject.NULL : this.abstracts);
+//        json.put(singleColumn.COLUMN_TYPE, this.type == null ? JSONObject.NULL : this.type);
+        if (!this.content.equals("")) {
+
+            json.put(singleColumn.COLUMN_CONTENT, this.content.equals("") ? JSONObject.NULL : new JSONObject(this.content));
+        }
         json.put(singleColumn.COLUMN_SCORE, this.score == null ? JSONObject.NULL : this.score);
         json.put(singleColumn.COLUMN_JUDGE, this.judgeName == null ? JSONObject.NULL : this.judgeName);
-        json.put(singleColumn.COLUMN_SYNCED, this.synced == null ? JSONObject.NULL : this.synced);
-        json.put(singleColumn.COLUMN_SYNCED_DATE, this.sycnedDate == null ? JSONObject.NULL : this.sycnedDate);
+//        json.put(singleColumn.COLUMN_SYNCED, this.synced == null ? JSONObject.NULL : this.synced);
+//        json.put(singleColumn.COLUMN_SYNCED_DATE, this.sycnedDate == null ? JSONObject.NULL : this.sycnedDate);
         json.put(singleColumn.DEVICEID, this.deviceid == null ? JSONObject.NULL : this.deviceid);
         json.put(singleColumn.FORMDATE, this.formdate == null ? JSONObject.NULL : this.formdate);
         return json;

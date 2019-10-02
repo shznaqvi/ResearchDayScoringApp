@@ -16,8 +16,8 @@
         android:icon="@drawable/ic_upload"
         android:title="Sync Data" />
 
-    <!--    <item-->
-    <!--        android:id="@+id/databaseManager"-->
-    <!--        android:icon="@drawable/ic_presentation_black_24dp"-->
-    <!--        android:title="Database Manager" />-->
+    <item
+        android:id="@+id/databaseManager"
+        android:icon="@drawable/ic_presentation_black_24dp"
+        android:title="Database Manager" />
 </menu>

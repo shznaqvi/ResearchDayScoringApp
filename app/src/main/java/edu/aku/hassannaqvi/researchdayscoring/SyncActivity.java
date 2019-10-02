@@ -37,6 +37,7 @@ import edu.aku.hassannaqvi.researchdayscoring.get.GetAllData;
 import edu.aku.hassannaqvi.researchdayscoring.model.SyncModel;
 import edu.aku.hassannaqvi.researchdayscoring.sync.SyncAllData;
 
+
 public class SyncActivity extends AppCompatActivity {
     SharedPreferences.Editor editor;
     SharedPreferences sharedPref;
@@ -52,6 +53,10 @@ public class SyncActivity extends AppCompatActivity {
     Boolean listActivityCreated;
     Boolean uploadlistActivityCreated;
     String dtToday = new SimpleDateFormat("dd-MM-yy HH:mm").format(new Date().getTime());
+
+    private static final String POSTER_TYPE = "2";
+    private static final String PRESENTATION_TYPE = "1";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,7 +152,7 @@ public class SyncActivity extends AppCompatActivity {
                     "updateSyncedForms",
                     FinalScoreContract.class,
                     MainApp._HOST_URL_1 + FinalScoreContract.singleColumn._URL1,
-                    db.getUnsyncedForms("2"), 0, uploadListAdapter, uploadlist
+                    db.getUnsyncedForms(POSTER_TYPE), 0, uploadListAdapter, uploadlist
             ).execute();
             if (uploadlistActivityCreated) {
                 uploadmodel = new SyncModel();
@@ -160,7 +165,7 @@ public class SyncActivity extends AppCompatActivity {
                     "updateSyncedForms",
                     FinalScoreContract.class,
                     MainApp._HOST_URL_1 + FinalScoreContract.singleColumn._URL2,
-                    db.getUnsyncedForms("1"), 1, uploadListAdapter, uploadlist
+                    db.getUnsyncedForms(PRESENTATION_TYPE), 1, uploadListAdapter, uploadlist
             ).execute();
             uploadlistActivityCreated = false;
 

@@ -17,7 +17,7 @@ import edu.aku.hassannaqvi.researchdayscoring.core.DatabaseHelper;
 import edu.aku.hassannaqvi.researchdayscoring.core.MainApp;
 import edu.aku.hassannaqvi.researchdayscoring.databinding.ActivityAllProjectsBinding;
 
-public class AllPresProjectsActivity extends AppCompatActivity {
+public class AllProjectsActivity extends AppCompatActivity {
 
     ActivityAllProjectsBinding bi;
 
@@ -39,7 +39,7 @@ public class AllPresProjectsActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        init();
+//        init();
     }
 
     private void init() {
@@ -51,12 +51,11 @@ public class AllPresProjectsActivity extends AppCompatActivity {
         bi.allProjects.setHasFixedSize(true);
         bi.allProjects.setAdapter(adapter);
 
-
         adapter.setClickListener(new AllProjectListAdapter.OnItemClickListener() {
             @Override
             public void OnItemClick(ProjectsContract contract) {
 
-                startActivity(new Intent(AllPresProjectsActivity.this, OralPresentationScoring.class).putExtra("data", contract));
+                startActivity(new Intent(AllProjectsActivity.this, ScoringActivity.class).putExtra("data", contract));
 
             }
         });
@@ -72,5 +71,18 @@ public class AllPresProjectsActivity extends AppCompatActivity {
                 break;
         }
         return true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Toast.makeText(this, "onResume called", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        init();
     }
 }

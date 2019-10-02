@@ -62,10 +62,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + singleColumn.DEVICEID + " TEXT,"
             + singleColumn.FORMDATE + " TEXT,"
 //            + singleColumn.COLUMN_TITLE + " TEXT,"
-            + singleColumn.COLUMN_AUTHOR + " TEXT,"
-            + singleColumn.COLUMN_THEME + " TEXT,"
+//            + singleColumn.COLUMN_AUTHOR + " TEXT,"
+//            + singleColumn.COLUMN_THEME + " TEXT,"
             + singleColumn.COLUMN_TYPE + " TEXT,"
-            + singleColumn.COLUMN_ABSTRACTS + " TEXT,"
+//            + singleColumn.COLUMN_ABSTRACTS + " TEXT,"
             + singleColumn.COLUMN_JUDGE + " TEXT,"
             + singleColumn.COLUMN_CONTENT + " TEXT,"
             + singleColumn.COLUMN_SCORE + " TEXT,"
@@ -100,6 +100,38 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_DELETE_USERS);
         db.execSQL(SQL_DELETE_PROJECTS);
         db.execSQL(SQL_DELETE_FINAL_SCORE);
+
+    }
+
+    public boolean isDataExists(String id) {
+        SQLiteDatabase db = getReadableDatabase();
+
+// New value for one column
+        String[] columns = {
+                singleColumn.COLUMN_PROJECT_ID,
+        };
+
+// Which row to update, based on the ID
+        String selection = singleColumn.COLUMN_PROJECT_ID + " = ?";
+        String[] selectionArgs = {id};
+        Cursor cursor = db.query(singleColumn.TABLE_NAME, //Table to query
+                columns,                    //columns to return
+                selection,                  //columns for the WHERE clause
+                selectionArgs,              //The values for the WHERE clause
+                null,                       //group the rows
+                null,                       //filter by row groups
+                null);                      //The sort order
+
+        if (cursor.moveToFirst()) {
+//            MainApp.projIDs = cursor.getString(cursor.getColumnIndex(UsersTable.COLUMN_PROJ_IDS));
+            cursor.moveToNext();
+        }
+        int cursorCount = cursor.getCount();
+
+        cursor.close();
+        db.close();
+        return cursorCount > 0;
+
 
     }
 
@@ -143,12 +175,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
-        values.put(singleColumn.COLUMN_ABSTRACTS, fc.getAbstract());
-        values.put(singleColumn.COLUMN_AUTHOR, fc.getAuthor());
+//        values.put(singleColumn.COLUMN_ABSTRACTS, fc.getAbstract());
+//        values.put(singleColumn.COLUMN_AUTHOR, fc.getAuthor());
         values.put(singleColumn.COLUMN_JUDGE, fc.getJudgeName());
         values.put(singleColumn.COLUMN_PROJECT_ID, fc.getProj_id());
         values.put(singleColumn.COLUMN_SCORE, fc.getScore());
-        values.put(singleColumn.COLUMN_THEME, fc.getTheme());
+//        values.put(singleColumn.COLUMN_THEME, fc.getTheme());
 //        values.put(singleColumn.COLUMN_TITLE, fc.getTitle());
         values.put(singleColumn.COLUMN_TYPE, fc.getType());
         values.put(singleColumn.COLUMN_CONTENT, fc.getContent());
@@ -203,10 +235,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                  */
                 singleColumn._ID,
                 singleColumn.COLUMN_PROJECT_ID,
-                singleColumn.COLUMN_AUTHOR,
-                singleColumn.COLUMN_THEME,
+//                singleColumn.COLUMN_AUTHOR,
+//                singleColumn.COLUMN_THEME,
                 singleColumn.COLUMN_TYPE,
-                singleColumn.COLUMN_ABSTRACTS,
+//                singleColumn.COLUMN_ABSTRACTS,
                 singleColumn.COLUMN_JUDGE,
                 singleColumn.COLUMN_CONTENT,
                 singleColumn.COLUMN_SCORE,
@@ -217,7 +249,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
         };
-        String whereClause = singleColumn.COLUMN_SYNCED + " is null OR " + singleColumn.COLUMN_SYNCED + " = ''  AND " + singleColumn.COLUMN_TYPE + "= ?";
+        String whereClause = singleColumn.COLUMN_TYPE + " = ? AND " + singleColumn.COLUMN_SYNCED + " is null OR " + singleColumn.COLUMN_SYNCED + " = ''";
         String[] whereArgs = {type};
         String groupBy = null;
         String having = null;

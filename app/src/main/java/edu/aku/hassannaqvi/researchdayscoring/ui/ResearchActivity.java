@@ -9,7 +9,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import edu.aku.hassannaqvi.researchdayscoring.R;
 import edu.aku.hassannaqvi.researchdayscoring.SyncActivity;
@@ -46,21 +45,21 @@ public class ResearchActivity extends AppCompatActivity {
                 int id = item.getItemId();
                 switch (id) {
                     case R.id.allPresProjects:
-                        startActivity(new Intent(ResearchActivity.this, AllPresProjectsActivity.class).putExtra("type", "1"));
+                        startActivity(new Intent(ResearchActivity.this, AllProjectsActivity.class).putExtra("type", "1"));
                         dl.closeDrawer(GravityCompat.START);
                         break;
                     case R.id.allPosProjects:
-                        startActivity(new Intent(ResearchActivity.this, AllPresProjectsActivity.class).putExtra("type", "2"));
+                        startActivity(new Intent(ResearchActivity.this, AllProjectsActivity.class).putExtra("type", "2"));
                         dl.closeDrawer(GravityCompat.START);
                         break;
                     case R.id.syncData:
                         startActivity(new Intent(ResearchActivity.this, SyncActivity.class));
                         dl.closeDrawer(GravityCompat.START);
                         break;
-//                    case R.id.databaseManager:
-//                        startActivity(new Intent(ResearchActivity.this, AndroidDatabaseManager.class));
-//                        dl.closeDrawer(GravityCompat.START);
-//                        break;
+                    case R.id.databaseManager:
+                        startActivity(new Intent(ResearchActivity.this, AndroidDatabaseManager.class));
+                        dl.closeDrawer(GravityCompat.START);
+                        break;
                     default:
                         return true;
                 }

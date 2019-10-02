@@ -167,20 +167,20 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:padding="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/colorPrimary"
                         android:gravity="center"
+                        android:padding="10dp"
                         android:text="Excellent"
                         android:textColor="@android:color/white" />
 
                     <TextView
-                        android:padding="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="#f7f7f7"
                         android:gravity="center"
+                        android:padding="5dp"
                         android:text="4"
                         android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
@@ -194,20 +194,20 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:padding="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/colorPrimary"
                         android:gravity="center"
+                        android:padding="10dp"
                         android:text="Very Good"
                         android:textColor="@android:color/white" />
 
                     <TextView
-                        android:padding="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="#f7f7f7"
                         android:gravity="center"
+                        android:padding="5dp"
                         android:text="3"
                         android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
@@ -221,20 +221,20 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:padding="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/colorPrimary"
                         android:gravity="center"
+                        android:padding="10dp"
                         android:text="Good"
                         android:textColor="@android:color/white" />
 
                     <TextView
-                        android:padding="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="#f7f7f7"
                         android:gravity="center"
+                        android:padding="5dp"
                         android:text="2"
                         android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
@@ -247,20 +247,20 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:padding="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/colorPrimary"
                         android:gravity="center"
+                        android:padding="10dp"
                         android:text="Fair"
                         android:textColor="@android:color/white" />
 
                     <TextView
-                        android:padding="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="#f7f7f7"
                         android:gravity="center"
+                        android:padding="5dp"
                         android:text="1"
                         android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
@@ -273,20 +273,20 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:padding="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/colorPrimary"
                         android:gravity="center"
+                        android:padding="10dp"
                         android:text="Not Done"
                         android:textColor="@android:color/white" />
 
                     <TextView
-                        android:padding="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="#f7f7f7"
                         android:gravity="center"
+                        android:padding="5dp"
                         android:text="0"
                         android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 

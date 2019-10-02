@@ -35,10 +35,10 @@ import edu.aku.hassannaqvi.researchdayscoring.model.Poster;
 import edu.aku.hassannaqvi.researchdayscoring.model.Presentation;
 
 
-public class OralPresentationScoring extends AppCompatActivity {
+public class ScoringActivity extends AppCompatActivity {
 
 
-    private static final String TAG = "OralPresentationScoring";
+    private static final String TAG = "ScoringActivity";
     ActivityOralPresentationScoringBinding bi;
     PresentationScoringAdapter adapter;
     PosterScoringAdapter adapter1;
@@ -188,12 +188,12 @@ public class OralPresentationScoring extends AppCompatActivity {
     private void saveDraft() throws JSONException {
 
         MainApp.fsc = new FinalScoreContract();
-        MainApp.fsc.setAbstract(contract.getAbstract());
-        MainApp.fsc.setAuthor(contract.getAuthor());
+//        MainApp.fsc.setAbstract(contract.getAbstract());
+//        MainApp.fsc.setAuthor(contract.getAuthor());
         MainApp.fsc.setProj_id(contract.getProj_id());
 //        MainApp.fsc.setTitle(contract.getTitle());
         MainApp.fsc.setType(contract.getType());
-        MainApp.fsc.setTheme(contract.getTheme());
+//        MainApp.fsc.setTheme(contract.getTheme());
         MainApp.fsc.setDeviceid(Settings.Secure.getString(getApplicationContext().getContentResolver(),
                 Settings.Secure.ANDROID_ID));
         MainApp.fsc.setFormdate((new SimpleDateFormat("dd-MM-yy HH:mm").format(new Date().getTime())));

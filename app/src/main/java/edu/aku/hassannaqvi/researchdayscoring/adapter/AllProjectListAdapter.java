@@ -11,12 +11,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.util.List;
 
 import edu.aku.hassannaqvi.researchdayscoring.R;
 import edu.aku.hassannaqvi.researchdayscoring.animation.Animations;
 import edu.aku.hassannaqvi.researchdayscoring.contracts.ProjectsContract;
+import edu.aku.hassannaqvi.researchdayscoring.core.DatabaseHelper;
 import edu.aku.hassannaqvi.researchdayscoring.databinding.ListItemBinding;
 
 public class AllProjectListAdapter extends RecyclerView.Adapter<AllProjectListAdapter.ViewHolder> {
@@ -25,6 +27,7 @@ public class AllProjectListAdapter extends RecyclerView.Adapter<AllProjectListAd
     List<ProjectsContract> list;
 
     OnItemClickListener clickListener;
+    DatabaseHelper db;
 
     public void setClickListener(OnItemClickListener clickListener) {
         this.clickListener = clickListener;
@@ -33,6 +36,7 @@ public class AllProjectListAdapter extends RecyclerView.Adapter<AllProjectListAd
     public AllProjectListAdapter(Context context, List<ProjectsContract> list) {
         this.list = list;
         this.context = context;
+        db = new DatabaseHelper(context);
     }
 
     @NonNull
@@ -65,11 +69,22 @@ public class AllProjectListAdapter extends RecyclerView.Adapter<AllProjectListAd
                 }
             });
 
+            if (!db.isDataExists(list.get(i).getProj_id())) {
+                holder.bi.checkMark.setVisibility(View.GONE);
+            } else {
+                holder.bi.checkMark.setVisibility(View.VISIBLE);
+            }
+
             holder.bi.parent.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    clickListener.OnItemClick(list.get(i));
+                    if (!db.isDataExists(list.get(i).getProj_id())) {
+                        clickListener.OnItemClick(list.get(i));
+                    } else {
+                        Toast.makeText(context, "Presentation has been added", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
             });
         }
