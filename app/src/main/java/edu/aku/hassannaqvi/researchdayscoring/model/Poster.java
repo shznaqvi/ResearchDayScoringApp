@@ -9,7 +9,7 @@ public class Poster {
     public boolean isComment;
     public int position;
     public int questionType = 0;
-    public int score= 0;
+    public int score = -1;
 
     public Poster(boolean isSection, int position) {
         this.isSection = isSection;

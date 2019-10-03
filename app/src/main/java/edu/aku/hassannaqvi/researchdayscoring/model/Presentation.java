@@ -8,7 +8,7 @@ public class Presentation {
     public boolean isSection;
     public boolean isComment;
     public int position;
-    public int score;
+    public int score = -1;
     public int questionType = 1;
 
 

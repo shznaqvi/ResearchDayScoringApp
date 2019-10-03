@@ -82,10 +82,15 @@ public class ScoringActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     if (list.size() > 0) list.clear();
                     for (int i = 0; i < adapter.getList().size() - 2; i++) {
-
                         if (!adapter.getList().get(i).isSection) {
-                            if (!adapter.getList().get(i).isSection) {
-                                list.add(adapter.getList().get(i));
+                            if (!adapter.getList().get(i).isComment) {
+                                if (adapter.getList().get(i).score != -1) {
+                                    list.add(adapter.getList().get(i));
+                                } else {
+                                    Toast.makeText(ScoringActivity.this, "Please select at least one response", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+
                             }
                         }
                     }
@@ -108,7 +113,15 @@ public class ScoringActivity extends AppCompatActivity {
                     if (list1.size() > 0) list1.clear();
                     for (int i = 0; i < adapter1.getList().size(); i++) {
                         if (!adapter1.getList().get(i).isSection) {
-                            list1.add(adapter1.getList().get(i));
+                            if (!adapter1.getList().get(i).isComment) {
+                                if (adapter1.getList().get(i).score != -1) {
+                                    list1.add(adapter1.getList().get(i));
+                                } else {
+                                    Toast.makeText(ScoringActivity.this, "Please select at least one response", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+
+                            }
                         }
                     }
                     openDialog("Submit");
