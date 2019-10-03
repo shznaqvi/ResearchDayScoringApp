@@ -133,7 +133,7 @@ public class PresentationScoringAdapter extends RecyclerView.Adapter<RecyclerVie
             if (finalJ == i) {
                 button.setBackground(context.getDrawable(R.drawable.star_button_yellow));
             } else {
-                button.setBackground(context.getDrawable(R.drawable.round_button));
+                button.setBackground(context.getDrawable(R.drawable.star_button));
             }
         }
     }

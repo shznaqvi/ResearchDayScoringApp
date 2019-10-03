@@ -9,6 +9,8 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
@@ -74,28 +76,18 @@ public class PosterScoringAdapter extends RecyclerView.Adapter<RecyclerView.View
             final ContentViewHolder vh = (ContentViewHolder) holder;
             vh.bi.contentText.setText(list.get(i).sectionTitle);
             final int pos = i;
-//            vh.bi.pointsPlus.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    if (list.get(pos).score <= 3) {
-//                        vh.bi.counterText.setText(String.valueOf(++list.get(pos).score));
-//
-//                    }
-//
-//
-//                }
-//            });
-//            vh.bi.pointsMinus.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    if (list.get(pos).score > 0) {
-//                        vh.bi.counterText.setText(String.valueOf(--list.get(pos).score));
-//
-//                    }
-//
-//                }
-//            });
-
+            for (int j = 0; j < vh.bi.linearLayout.getChildCount(); j++) {
+                final Button button = (Button) vh.bi.linearLayout.getChildAt(j);
+                final int finalJ = j;
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        toggleTint(finalJ, vh.bi.linearLayout);
+                        vh.bi.marksShow.setText(String.valueOf(finalJ));
+                        list.get(pos).score = finalJ;
+                    }
+                });
+            }
         }
 
         if (holder instanceof CommentViewHolder) {
@@ -121,6 +113,18 @@ public class PosterScoringAdapter extends RecyclerView.Adapter<RecyclerView.View
             });
         }
 
+    }
+
+    private void toggleTint(int finalJ, LinearLayout linearLayout) {
+
+        for (int i = 0; i < linearLayout.getChildCount(); i++) {
+            Button button = (Button) linearLayout.getChildAt(i);
+            if (finalJ == i) {
+                button.setBackground(context.getDrawable(R.drawable.star_button_yellow));
+            } else {
+                button.setBackground(context.getDrawable(R.drawable.star_button));
+            }
+        }
     }
 
     @Override
