@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:elevation="1dp"
         android:background="@android:color/white"
         android:orientation="horizontal"
-        android:padding="10dp">
+        android:padding="16dp">
 
-        <!--        -->
+        <!--
 
         <ImageButton
             android:id="@+id/titlebg"
@@ -24,14 +25,28 @@
 
 
         </ImageButton>
+        -->
+        <TextView
+            android:id="@+id/titlebg"
+            android:layout_width="72dp"
+            android:layout_height="52dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="#"
+            android:textColor="@color/colorAccent"
+            android:textSize="48sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
+
+        </TextView>
         <TextView
             android:id="@+id/contentText"
             android:layout_width="417dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
             android:layout_marginTop="8dp"
             android:maxLines="2"
+            android:textSize="18sp"
             android:text="Relevance and Significance of  (to field of study, community, etc.)"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="@android:color/black"
@@ -89,6 +104,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_marginTop="40dp"
+            android:layout_marginStart="72dp"
             android:id="@+id/linearLayout"
             android:layout_marginBottom="16dp"
             android:layout_height="wrap_content"
@@ -104,10 +120,11 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="1dp"
                 android:layout_marginRight="1dp"
-                android:background="@drawable/round_button"
+                android:background="@drawable/star_button"
                 android:fontFamily="sans-serif-light"
-                android:gravity="center"
+                android:elevation="1dp"
                 android:padding="8dp"
+                android:gravity="center|center_horizontal|center_vertical"
                 android:text="0"
                 android:textColor="@android:color/black"
                 android:textSize="24sp" />
@@ -115,13 +132,14 @@
             <Button
                 android:id="@+id/pres_01_02"
                 android:layout_width="48dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="1dp"
                 android:layout_marginRight="1dp"
-                android:background="@drawable/round_button"
+                android:background="@drawable/star_button"
                 android:fontFamily="sans-serif-light"
-                android:gravity="center"
+                android:elevation="1dp"
                 android:padding="8dp"
+                android:gravity="center|center_horizontal|center_vertical"
                 android:text="1"
                 android:textColor="@android:color/black"
                 android:textSize="24sp"
@@ -131,13 +149,14 @@
             <Button
                 android:id="@+id/pres_01_03"
                 android:layout_width="48dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="1dp"
                 android:layout_marginRight="1dp"
-                android:background="@drawable/round_button"
+                android:background="@drawable/star_button"
                 android:fontFamily="sans-serif-light"
-                android:gravity="center"
+                android:elevation="1dp"
                 android:padding="8dp"
+                android:gravity="center|center_horizontal|center_vertical"
                 android:text="2"
                 android:textColor="@android:color/black"
                 android:textSize="24sp" />
@@ -145,13 +164,14 @@
             <Button
                 android:id="@+id/pres_01_04"
                 android:layout_width="48dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="1dp"
                 android:layout_marginRight="1dp"
-                android:background="@drawable/round_button"
+                android:background="@drawable/star_button"
                 android:fontFamily="sans-serif-light"
-                android:gravity="center"
+                android:elevation="1dp"
                 android:padding="8dp"
+                android:gravity="center|center_horizontal|center_vertical"
                 android:text="3"
                 android:textColor="@android:color/black"
                 android:textSize="24sp" />
@@ -159,13 +179,14 @@
             <Button
                 android:id="@+id/pres_01_05"
                 android:layout_width="48dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="1dp"
                 android:layout_marginRight="1dp"
-                android:background="@drawable/round_button"
+                android:background="@drawable/star_button"
                 android:fontFamily="sans-serif-light"
-                android:gravity="center"
+                android:elevation="1dp"
                 android:padding="8dp"
+                android:gravity="center|center_horizontal|center_vertical"
                 android:text="4"
                 android:textColor="@android:color/black"
                 android:textSize="24sp" />
