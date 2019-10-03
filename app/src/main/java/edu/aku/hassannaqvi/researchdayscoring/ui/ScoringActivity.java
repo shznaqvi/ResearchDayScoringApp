@@ -48,7 +48,7 @@ public class ScoringActivity extends AppCompatActivity {
     DecimalFormat formatter = new DecimalFormat("00");
     AlertDialog dialog;
     ArrayList<Poster> posters;
-    boolean isExpand = false;
+    boolean isBackPressed = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,14 +57,16 @@ public class ScoringActivity extends AppCompatActivity {
 
         contract = getIntent().getParcelableExtra("data");
 
+        this.setTitle(contract.getAuthor().toUpperCase() + "'s Presentation");
         init();
 
     }
 
     private void init() {
-        bi.authorName.setText(contract.getAuthor());
+        bi.authorName.setText(contract.getAuthor().toUpperCase());
         bi.projectTheme.setText(contract.getTheme());
-        bi.projectAbstract.setText(contract.getAbstract());
+        bi.projTitle.setText(contract.getTitle());
+        bi.projectID.setText(contract.getProj_id().split("_")[0] + " " + contract.getProj_id().split("_")[1]);
         if (contract.getType().equals("1")) {
             ArrayList<Presentation> items = new ArrayList<>();
             items = Data.getPresentationItems(this);
@@ -87,7 +89,7 @@ public class ScoringActivity extends AppCompatActivity {
                             }
                         }
                     }
-                    openDialog();
+                    openDialog("Submit");
                 }
             });
 
@@ -109,25 +111,23 @@ public class ScoringActivity extends AppCompatActivity {
                             list1.add(adapter1.getList().get(i));
                         }
                     }
-                    openDialog();
+                    openDialog("Submit");
                 }
             });
 
         }
 
-        bi.openAbstract.setOnClickListener(new View.OnClickListener() {
+        bi.discardBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                boolean show = toggleLayout(!isExpand, v, bi.abstractLayout);
-                isExpand = show;
+                openDialog("Discard");
             }
         });
 
-
     }
 
-    private void openDialog() {
+    public void openDialog(final String message) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View view = LayoutInflater.from(this).inflate(R.layout.custom_dialog_layout, null);
@@ -135,6 +135,7 @@ public class ScoringActivity extends AppCompatActivity {
         final AlertDialog dialog = builder.create();
         dialog.show();
         CustomDialogLayoutBinding bi = DataBindingUtil.bind(view);
+        bi.dialogText.setText("Are You Sure You Want To  " + message + "?");
 
         bi.btnNo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,15 +148,20 @@ public class ScoringActivity extends AppCompatActivity {
         bi.btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                try {
-                    saveDraft();
-                    if (updateDB()) {
-                        finish();
+                if (message.equals("Discard")) {
+                    dialog.dismiss();
+                    finish();
+                } else {
+                    try {
+                        saveDraft();
+                        if (updateDB()) {
+                            finish();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
+
             }
         });
 
@@ -188,12 +194,8 @@ public class ScoringActivity extends AppCompatActivity {
     private void saveDraft() throws JSONException {
 
         MainApp.fsc = new FinalScoreContract();
-//        MainApp.fsc.setAbstract(contract.getAbstract());
-//        MainApp.fsc.setAuthor(contract.getAuthor());
         MainApp.fsc.setProj_id(contract.getProj_id());
-//        MainApp.fsc.setTitle(contract.getTitle());
         MainApp.fsc.setType(contract.getType());
-//        MainApp.fsc.setTheme(contract.getTheme());
         MainApp.fsc.setDeviceid(Settings.Secure.getString(getApplicationContext().getContentResolver(),
                 Settings.Secure.ANDROID_ID));
         MainApp.fsc.setFormdate((new SimpleDateFormat("dd-MM-yy HH:mm").format(new Date().getTime())));
@@ -227,4 +229,9 @@ public class ScoringActivity extends AppCompatActivity {
         MainApp.fsc.setScore(String.valueOf(score));
     }
 
+    @Override
+    public void onBackPressed() {
+        openDialog("Discard");
+
+    }
 }

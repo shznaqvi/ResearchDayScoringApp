@@ -135,6 +135,40 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    public String getScore(String id) {
+        SQLiteDatabase db = getReadableDatabase();
+
+        String score = "";
+
+// New value for one column
+        String[] columns = {
+                singleColumn.COLUMN_PROJECT_ID,
+                singleColumn.COLUMN_SCORE,
+        };
+
+// Which row to update, based on the ID
+        String selection = singleColumn.COLUMN_PROJECT_ID + " = ?";
+        String[] selectionArgs = {id};
+        Cursor cursor = db.query(singleColumn.TABLE_NAME, //Table to query
+                columns,                    //columns to return
+                selection,                  //columns for the WHERE clause
+                selectionArgs,              //The values for the WHERE clause
+                null,                       //group the rows
+                null,                       //filter by row groups
+                null);                      //The sort order
+
+        if (cursor.moveToFirst()) {
+            score = cursor.getString(cursor.getColumnIndex(singleColumn.COLUMN_SCORE));
+            cursor.moveToNext();
+        }
+
+        cursor.close();
+        db.close();
+        return score;
+
+
+    }
+
 
     public boolean Login(String username, String password) throws SQLException {
 
@@ -430,12 +464,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return pc;
     }
 
-    public List<ProjectsContract> getAllProject(String projIDs, String type) {
+    public List<ProjectsContract> getAllProject(String projID, String type) {
 //        List<ProjectsContract> formList = new ArrayList<>();
         ProjectsContract pc = new ProjectsContract();
         List<ProjectsContract> list = new ArrayList<>();
 
-        List<String> items = Arrays.asList(projIDs.split("\\s*,\\s*"));
+        List<String> items = Arrays.asList(projID.split("\\s*,\\s*"));
         String[] columns = {
                 ProjectsTable.COLUMN_ABSTRACTS,
                 ProjectsTable.COLUMN_THEME,

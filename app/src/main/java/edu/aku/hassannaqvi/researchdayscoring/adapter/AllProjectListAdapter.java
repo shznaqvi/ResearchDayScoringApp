@@ -73,6 +73,7 @@ public class AllProjectListAdapter extends RecyclerView.Adapter<AllProjectListAd
             if (!db.isDataExists(list.get(i).getProj_id())) {
                 holder.bi.checkMark.setVisibility(View.GONE);
             } else {
+                holder.bi.totalMarks.setText(db.getScore(list.get(i).getProj_id()));
                 holder.bi.checkMark.setVisibility(View.VISIBLE);
             }
 

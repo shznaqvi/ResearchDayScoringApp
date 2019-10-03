@@ -8,6 +8,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import edu.aku.hassannaqvi.researchdayscoring.R;
@@ -44,6 +46,7 @@ public class AllProjectsActivity extends AppCompatActivity {
 
     private void init() {
 
+        list = new ArrayList<>();
         db = new DatabaseHelper(this);
         list = db.getAllProject(MainApp.projIDs, projType);
         adapter = new AllProjectListAdapter(this, list);
