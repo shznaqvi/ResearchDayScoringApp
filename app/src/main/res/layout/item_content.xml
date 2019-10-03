@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -9,101 +10,105 @@
         android:orientation="horizontal"
         android:padding="10dp">
 
+        <!--        -->
+
         <ImageButton
             android:id="@+id/titlebg"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_marginStart="4dp"
             android:background="@drawable/ic_star"
             android:backgroundTint="@color/colorPrimary"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
 
         </ImageButton>
-        <!--        -->
 
         <TextView
             android:id="@+id/contentText"
             android:layout_width="417dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
             android:maxLines="2"
             android:text="Relevance and Significance of  (to field of study, community, etc.)"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="@android:color/black"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/constraintLayout2"
-            app:layout_constraintStart_toEndOf="@+id/titlebg"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.509" />
-
-
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/constraintLayout2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_weight="4"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/titlebg"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/pointsMinus"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:text="-"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/counterText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:text="0"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@android:color/black"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/pointsPlus"
-                app:layout_constraintStart_toEndOf="@+id/pointsMinus"
-                app:layout_constraintTop_toTopOf="parent" />
+        <!--        <android.support.constraint.ConstraintLayout-->
+        <!--            android:id="@+id/constraintLayout2"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginStart="10dp"-->
+        <!--            android:layout_marginEnd="10dp"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintHorizontal_weight="4"-->
+        <!--            app:layout_constraintTop_toTopOf="parent">-->
 
-            <Button
-                android:id="@+id/pointsPlus"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:text="+"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <!--            <Button-->
+        <!--                android:id="@+id/pointsMinus"-->
+        <!--                android:layout_width="40dp"-->
+        <!--                android:layout_height="40dp"-->
+        <!--                android:text="-"-->
+        <!--                android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
+        <!--                app:layout_constraintStart_toStartOf="parent"-->
+        <!--                app:layout_constraintTop_toTopOf="parent" />-->
 
-        </android.support.constraint.ConstraintLayout>
+        <!--            <TextView-->
+        <!--                android:id="@+id/counterText"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginStart="5dp"-->
+        <!--                android:layout_marginEnd="5dp"-->
+        <!--                android:text="0"-->
+        <!--                android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
+        <!--                android:textColor="@android:color/black"-->
+        <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--                app:layout_constraintEnd_toStartOf="@+id/pointsPlus"-->
+        <!--                app:layout_constraintStart_toEndOf="@+id/pointsMinus"-->
+        <!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+        <!--            <Button-->
+        <!--                android:id="@+id/pointsPlus"-->
+        <!--                android:layout_width="40dp"-->
+        <!--                android:layout_height="40dp"-->
+        <!--                android:text="+"-->
+        <!--                android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
+        <!--                app:layout_constraintEnd_toEndOf="parent"-->
+        <!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+        <!--        </android.support.constraint.ConstraintLayout>-->
 
         <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_marginTop="40dp"
             android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
+            android:layout_marginBottom="16dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="56dp"
+            android:paddingBottom="5dp"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@id/constraintLayout2">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/titlebg"
+            app:layout_constraintTop_toBottomOf="@+id/contentText">
 
             <Button
                 android:id="@+id/pres_01_01"
                 android:layout_width="48dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="1dp"
                 android:layout_marginRight="1dp"
                 android:background="@drawable/round_button"
                 android:fontFamily="sans-serif-light"
                 android:gravity="center"
-                android:onClick="scorePres"
                 android:padding="8dp"
-                android:text="1"
+                android:text="0"
                 android:textColor="@android:color/black"
                 android:textSize="24sp" />
 
@@ -116,9 +121,8 @@
                 android:background="@drawable/round_button"
                 android:fontFamily="sans-serif-light"
                 android:gravity="center"
-                android:onClick="scorePres"
                 android:padding="8dp"
-                android:text="2"
+                android:text="1"
                 android:textColor="@android:color/black"
                 android:textSize="24sp"
 
@@ -126,7 +130,6 @@
 
             <Button
                 android:id="@+id/pres_01_03"
-
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="1dp"
@@ -134,15 +137,27 @@
                 android:background="@drawable/round_button"
                 android:fontFamily="sans-serif-light"
                 android:gravity="center"
-                android:onClick="scorePres"
+                android:padding="8dp"
+                android:text="2"
+                android:textColor="@android:color/black"
+                android:textSize="24sp" />
+
+            <Button
+                android:id="@+id/pres_01_04"
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="1dp"
+                android:background="@drawable/round_button"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center"
                 android:padding="8dp"
                 android:text="3"
                 android:textColor="@android:color/black"
                 android:textSize="24sp" />
 
             <Button
-                android:id="@+id/pres_01_04"
-
+                android:id="@+id/pres_01_05"
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="1dp"
@@ -150,42 +165,27 @@
                 android:background="@drawable/round_button"
                 android:fontFamily="sans-serif-light"
                 android:gravity="center"
-                android:onClick="scorePres"
                 android:padding="8dp"
                 android:text="4"
-                android:textColor="@android:color/black"
-                android:textSize="24sp" />
-
-            <Button
-                android:id="@+id/pres_01_05"
-
-                android:layout_width="48dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="1dp"
-                android:layout_marginRight="1dp"
-                android:background="@drawable/round_button"
-                android:fontFamily="sans-serif-light"
-                android:gravity="center"
-                android:onClick="scorePres"
-                android:padding="8dp"
-                android:text="5"
                 android:textColor="@android:color/black"
                 android:textSize="24sp" />
         </LinearLayout>
 
 
-        <!--        <LinearLayout-->
-        <!--            android:gravity="center"-->
-        <!--            android:layout_width="0dp"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_gravity="center_vertical"-->
-        <!--            android:layout_weight="2"-->
-        <!--            android:orientation="horizontal">-->
-
-
-        <!--        </LinearLayout>-->
-
-
+        <TextView
+            android:id="@+id/marksShow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.857"
+            app:layout_constraintStart_toEndOf="@+id/linearLayout"
+            app:layout_constraintTop_toBottomOf="@+id/contentText"
+            app:layout_constraintVertical_bias="0.0" />
     </android.support.constraint.ConstraintLayout>
 </layout>
 

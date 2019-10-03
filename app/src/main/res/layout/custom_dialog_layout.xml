@@ -1,35 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
 
-        <RelativeLayout
-            android:layout_width="match_parent"
+        <!--        <RelativeLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="?attr/actionBarSize"-->
+        <!--            android:background="@color/colorPrimary">-->
+
+
+        <!--        </RelativeLayout>-->
+
+
+        <ImageView
+            android:layout_width="?attr/actionBarSize"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary">
-
-
-            <ImageView
-                android:layout_width="?attr/actionBarSize"
-                android:layout_height="?attr/actionBarSize"
-                android:layout_centerInParent="true"
-                android:layout_margin="5dp"
-                android:src="@drawable/ic_info"
-                android:tint="@android:color/white" />
-
-        </RelativeLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
             android:layout_margin="10dp"
-            android:gravity="center"
-            android:text="Alert!"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="50sp" />
+            android:src="@drawable/ic_info"
+            android:tint="@color/colorPrimary" />
+
+        <!--        <TextView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_margin="10dp"-->
+        <!--            android:gravity="center"-->
+        <!--            android:text="Alert!"-->
+        <!--            android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
+        <!--            android:textSize="35sp" />-->
 
         <TextView
             android:layout_width="match_parent"

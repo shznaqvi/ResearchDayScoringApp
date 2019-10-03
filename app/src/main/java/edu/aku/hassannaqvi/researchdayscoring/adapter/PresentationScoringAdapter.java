@@ -1,6 +1,7 @@
 package edu.aku.hassannaqvi.researchdayscoring.adapter;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +10,9 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -85,28 +89,18 @@ public class PresentationScoringAdapter extends RecyclerView.Adapter<RecyclerVie
             final ContentViewHolder vh = (ContentViewHolder) holder;
             vh.bi.contentText.setText(list.get(i).presentationReview);
             final int pos = i;
-            vh.bi.pointsPlus.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (list.get(pos).score <= 3) {
-                        vh.bi.counterText.setText(String.valueOf(++list.get(pos).score));
-
-
+            for (int j = 0; j < vh.bi.linearLayout.getChildCount(); j++) {
+                final Button button = (Button) vh.bi.linearLayout.getChildAt(j);
+                final int finalJ = j;
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        toggleTint(finalJ, vh.bi.linearLayout);
+                        vh.bi.marksShow.setText(String.valueOf(finalJ));
+                        list.get(pos).score = finalJ;
                     }
-
-
-                }
-            });
-            vh.bi.pointsMinus.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (list.get(pos).score > 0) {
-                        vh.bi.counterText.setText(String.valueOf(--list.get(pos).score));
-
-                    }
-
-                }
-            });
+                });
+            }
 
         }
 
@@ -132,6 +126,18 @@ public class PresentationScoringAdapter extends RecyclerView.Adapter<RecyclerVie
             });
         }
 
+    }
+
+    private void toggleTint(int finalJ, LinearLayout linearLayout) {
+
+        for (int i = 0; i < linearLayout.getChildCount(); i++) {
+            Button button = (Button) linearLayout.getChildAt(i);
+            if (finalJ == i) {
+                button.setBackground(context.getDrawable(R.drawable.round_button_yellow));
+            } else {
+                button.setBackground(context.getDrawable(R.drawable.round_button));
+            }
+        }
     }
 
     @Override

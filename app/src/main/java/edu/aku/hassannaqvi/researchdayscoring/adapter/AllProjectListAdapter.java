@@ -53,9 +53,10 @@ public class AllProjectListAdapter extends RecyclerView.Adapter<AllProjectListAd
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int i) {
 
         if (list.get(i) != null) {
-
             holder.bi.projectTitle.setText(list.get(i).getTitle());
-            holder.bi.authorFirstLetter.setText(String.valueOf(list.get(i).getAuthor().charAt(0)));
+
+            holder.bi.authorFirstLetter.setText(list.get(i).getProj_id().split("_")[0] + " " + list.get(i).getProj_id().split("_")[1]);
+            holder.bi.author.setText(list.get(i).getAuthor());
 
             holder.bi.viewMoreBtn.setOnClickListener(new View.OnClickListener() {
                 @Override

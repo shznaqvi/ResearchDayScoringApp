@@ -74,27 +74,27 @@ public class PosterScoringAdapter extends RecyclerView.Adapter<RecyclerView.View
             final ContentViewHolder vh = (ContentViewHolder) holder;
             vh.bi.contentText.setText(list.get(i).sectionTitle);
             final int pos = i;
-            vh.bi.pointsPlus.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (list.get(pos).score <= 3) {
-                        vh.bi.counterText.setText(String.valueOf(++list.get(pos).score));
-
-                    }
-
-
-                }
-            });
-            vh.bi.pointsMinus.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (list.get(pos).score > 0) {
-                        vh.bi.counterText.setText(String.valueOf(--list.get(pos).score));
-
-                    }
-
-                }
-            });
+//            vh.bi.pointsPlus.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    if (list.get(pos).score <= 3) {
+//                        vh.bi.counterText.setText(String.valueOf(++list.get(pos).score));
+//
+//                    }
+//
+//
+//                }
+//            });
+//            vh.bi.pointsMinus.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    if (list.get(pos).score > 0) {
+//                        vh.bi.counterText.setText(String.valueOf(--list.get(pos).score));
+//
+//                    }
+//
+//                }
+//            });
 
         }
 

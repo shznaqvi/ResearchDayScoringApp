@@ -12,7 +12,7 @@
         <LinearLayout
             android:id="@+id/parent"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:background="#fff"
             android:clickable="true"
             android:focusable="true"
@@ -29,7 +29,9 @@
                 android:layout_height="40dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_check"
-                android:tint="@color/colorAccent" />
+                android:tint="@color/colorAccent"
+                android:visibility="gone"
+                tools:visibility="visible" />
 
             <RelativeLayout
                 android:id="@+id/titlebg"
@@ -40,13 +42,15 @@
 
 
                 <TextView
+                    android:gravity="center"
+                    android:padding="5dp"
                     android:id="@+id/authorFirstLetter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="SA"
+                    android:text="PRED 120"
                     android:textColor="@android:color/white"
-                    android:textSize="20sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
 
             </RelativeLayout>
@@ -55,17 +59,36 @@
                 android:layout_width="15dp"
                 android:layout_height="wrap_content" />
 
-
-            <TextView
-                android:id="@+id/projectTitle"
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
                 android:layout_weight="1"
-                android:text="Mutufa Ansari"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textColor="#37474F" />
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/author"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_weight="1"
+                    android:text="Mutufa Ansari"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/projectTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
+                    android:text="Mutufa Ansari"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/gray" />
+            </LinearLayout>
+
 
             <View
                 android:layout_width="15dp"
