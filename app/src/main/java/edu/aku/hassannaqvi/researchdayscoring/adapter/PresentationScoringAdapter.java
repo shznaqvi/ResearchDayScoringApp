@@ -1,7 +1,6 @@
 package edu.aku.hassannaqvi.researchdayscoring.adapter;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -12,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -133,7 +131,7 @@ public class PresentationScoringAdapter extends RecyclerView.Adapter<RecyclerVie
         for (int i = 0; i < linearLayout.getChildCount(); i++) {
             Button button = (Button) linearLayout.getChildAt(i);
             if (finalJ == i) {
-                button.setBackground(context.getDrawable(R.drawable.round_button_yellow));
+                button.setBackground(context.getDrawable(R.drawable.star_button_yellow));
             } else {
                 button.setBackground(context.getDrawable(R.drawable.round_button));
             }
