@@ -5,11 +5,12 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="4dp"
         android:elevation="1dp"
-        android:background="@android:color/white"
-        android:orientation="horizontal"
-        android:padding="16dp">
+        android:background="@drawable/item_gradiant"
+        android:orientation="horizontal">
 
         <!--
 
@@ -42,15 +43,16 @@
         </TextView>
         <TextView
             android:id="@+id/contentText"
-            android:layout_width="417dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:maxLines="2"
+            android:layout_marginStart="72dp"
+            android:layout_marginTop="16dp"
             android:textSize="18sp"
+            android:maxLines="3"
             android:text="Relevance and Significance of  (to field of study, community, etc.)"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="@android:color/black"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/marksShow"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/titlebg"
             app:layout_constraintTop_toTopOf="parent" />
@@ -103,12 +105,9 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_marginTop="40dp"
             android:layout_marginStart="72dp"
             android:id="@+id/linearLayout"
-            android:layout_marginBottom="16dp"
             android:layout_height="wrap_content"
-            android:paddingBottom="5dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/titlebg"
@@ -197,16 +196,11 @@
             android:id="@+id/marksShow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:textColor="@color/colorPrimary"
-            android:textSize="40sp"
+            android:textColor="@color/grayOverlay"
+            android:textSize="110sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.857"
-            app:layout_constraintStart_toEndOf="@+id/linearLayout"
-            app:layout_constraintTop_toBottomOf="@+id/contentText"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintEnd_toEndOf="parent" />
     </android.support.constraint.ConstraintLayout>
 </layout>
 
