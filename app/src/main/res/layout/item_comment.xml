@@ -5,6 +5,16 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Comments (if any)"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:textColor="@color/colorPrimary"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
 
         <EditText
             android:id="@+id/comment"
@@ -14,6 +24,9 @@
             android:background="@drawable/et_style"
             android:hint="Comment"
             android:inputType="textMultiLine"
+            android:elevation="1dp"
+            android:maxLines="8"
+            android:minLines="3"
             android:padding="10dp" />
 
 
