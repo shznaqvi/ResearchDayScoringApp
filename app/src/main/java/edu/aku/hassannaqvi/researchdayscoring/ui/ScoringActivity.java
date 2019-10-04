@@ -7,6 +7,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -243,7 +244,17 @@ public class ScoringActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        openDialog("Discard");
+        openDialog("discard");
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                openDialog("discard");
+                break;
+        }
+        return true;
     }
 }
