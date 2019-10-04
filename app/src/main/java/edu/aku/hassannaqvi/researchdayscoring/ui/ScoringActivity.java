@@ -29,7 +29,6 @@ import edu.aku.hassannaqvi.researchdayscoring.core.DatabaseHelper;
 import edu.aku.hassannaqvi.researchdayscoring.core.MainApp;
 import edu.aku.hassannaqvi.researchdayscoring.databinding.ActivityOralPresentationScoringBinding;
 import edu.aku.hassannaqvi.researchdayscoring.databinding.CustomDialogLayoutBinding;
-import edu.aku.hassannaqvi.researchdayscoring.databinding.DialogLayoutBinding;
 import edu.aku.hassannaqvi.researchdayscoring.model.Data;
 import edu.aku.hassannaqvi.researchdayscoring.model.Poster;
 import edu.aku.hassannaqvi.researchdayscoring.model.Presentation;
@@ -87,14 +86,14 @@ public class ScoringActivity extends AppCompatActivity {
                                 if (adapter.getList().get(i).score != -1) {
                                     list.add(adapter.getList().get(i));
                                 } else {
-                                    Toast.makeText(ScoringActivity.this, "Please select at least one response", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(ScoringActivity.this, "Please score all criteria to submit!", Toast.LENGTH_SHORT).show();
                                     return;
                                 }
 
                             }
                         }
                     }
-                    openDialog("Submit");
+                    openDialog("submit");
                 }
             });
 
@@ -117,14 +116,14 @@ public class ScoringActivity extends AppCompatActivity {
                                 if (adapter1.getList().get(i).score != -1) {
                                     list1.add(adapter1.getList().get(i));
                                 } else {
-                                    Toast.makeText(ScoringActivity.this, "Please select at least one response", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(ScoringActivity.this, "Please score all criteria to submit!", Toast.LENGTH_SHORT).show();
                                     return;
                                 }
 
                             }
                         }
                     }
-                    openDialog("Submit");
+                    openDialog("submit");
                 }
             });
 
@@ -134,7 +133,7 @@ public class ScoringActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                openDialog("Discard");
+                openDialog("discard");
             }
         });
 
@@ -148,7 +147,7 @@ public class ScoringActivity extends AppCompatActivity {
         final AlertDialog dialog = builder.create();
         dialog.show();
         CustomDialogLayoutBinding bi = DataBindingUtil.bind(view);
-        bi.dialogText.setText("Are You Sure You Want To  " + message + "?");
+        bi.dialogText.setText("Are you sure you want to " + message + "?");
 
         bi.btnNo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -161,7 +160,7 @@ public class ScoringActivity extends AppCompatActivity {
         bi.btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (message.equals("Discard")) {
+                if (message.equals("discard")) {
                     dialog.dismiss();
                     finish();
                 } else {
