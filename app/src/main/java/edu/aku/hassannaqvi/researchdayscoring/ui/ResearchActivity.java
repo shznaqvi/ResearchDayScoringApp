@@ -56,9 +56,8 @@ public class ResearchActivity extends AppCompatActivity {
                         startActivity(new Intent(ResearchActivity.this, SyncActivity.class));
                         dl.closeDrawer(GravityCompat.START);
                         break;
-                    case R.id.databaseManager:
-                        startActivity(new Intent(ResearchActivity.this, AndroidDatabaseManager.class));
-                        dl.closeDrawer(GravityCompat.START);
+                    case R.id.logout:
+                        finish();
                         break;
                     default:
                         return true;

@@ -136,7 +136,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public String getScore(String id) {
+    public String getScore(String id, String judgeName) {
         SQLiteDatabase db = getReadableDatabase();
 
         String score = "";
@@ -145,11 +145,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String[] columns = {
                 singleColumn.COLUMN_PROJECT_ID,
                 singleColumn.COLUMN_SCORE,
+                singleColumn.COLUMN_JUDGE,
         };
 
 // Which row to update, based on the ID
-        String selection = singleColumn.COLUMN_PROJECT_ID + " = ?";
-        String[] selectionArgs = {id};
+        String selection = singleColumn.COLUMN_PROJECT_ID + " = ? AND " + singleColumn.COLUMN_JUDGE + " = ?";
+        String[] selectionArgs = {id, judgeName};
         Cursor cursor = db.query(singleColumn.TABLE_NAME, //Table to query
                 columns,                    //columns to return
                 selection,                  //columns for the WHERE clause

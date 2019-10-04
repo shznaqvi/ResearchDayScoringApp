@@ -76,7 +76,7 @@ public class AllProjectListAdapter extends RecyclerView.Adapter<AllProjectListAd
                 holder.bi.projectTitle.setTextColor(Color.parseColor("#000000"));
                 holder.bi.parent.setBackgroundColor(Color.parseColor("#ffffff"));
             } else {
-                holder.bi.totalMarks.setText(db.getScore(list.get(i).getProj_id()));
+                holder.bi.totalMarks.setText(db.getScore(list.get(i).getProj_id(), MainApp.userName));
                 holder.bi.checkMark.setVisibility(View.VISIBLE);
                 holder.bi.totalMarks.setVisibility(View.VISIBLE);
                 holder.bi.projectTitle.setTextColor(Color.argb(153, 153, 153, 153));

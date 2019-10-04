@@ -17,7 +17,7 @@
         android:title="Sync Data" />
 
     <item
-        android:id="@+id/databaseManager"
-        android:icon="@drawable/ic_presentation_black_24dp"
-        android:title="Database Manager" />
+        android:id="@+id/logout"
+        android:icon="@drawable/ic_logout"
+        android:title="Logout" />
 </menu>
