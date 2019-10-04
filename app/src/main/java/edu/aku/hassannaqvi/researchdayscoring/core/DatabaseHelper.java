@@ -103,17 +103,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public boolean isDataExists(String id) {
+    public boolean isDataExists(String id, String judgeName) {
         SQLiteDatabase db = getReadableDatabase();
 
 // New value for one column
         String[] columns = {
                 singleColumn.COLUMN_PROJECT_ID,
+                singleColumn.COLUMN_JUDGE
         };
 
 // Which row to update, based on the ID
-        String selection = singleColumn.COLUMN_PROJECT_ID + " = ?";
-        String[] selectionArgs = {id};
+        String selection = singleColumn.COLUMN_PROJECT_ID + " = ? AND " + singleColumn.COLUMN_JUDGE + " = ?";
+        String[] selectionArgs = {id, judgeName};
         Cursor cursor = db.query(singleColumn.TABLE_NAME, //Table to query
                 columns,                    //columns to return
                 selection,                  //columns for the WHERE clause

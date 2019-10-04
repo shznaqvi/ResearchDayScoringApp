@@ -17,6 +17,7 @@ import edu.aku.hassannaqvi.researchdayscoring.R;
 import edu.aku.hassannaqvi.researchdayscoring.animation.Animations;
 import edu.aku.hassannaqvi.researchdayscoring.contracts.ProjectsContract;
 import edu.aku.hassannaqvi.researchdayscoring.core.DatabaseHelper;
+import edu.aku.hassannaqvi.researchdayscoring.core.MainApp;
 import edu.aku.hassannaqvi.researchdayscoring.databinding.ListItemBinding;
 
 public class AllProjectListAdapter extends RecyclerView.Adapter<AllProjectListAdapter.ViewHolder> {
@@ -69,7 +70,7 @@ public class AllProjectListAdapter extends RecyclerView.Adapter<AllProjectListAd
                 }
             });*/
 
-            if (!db.isDataExists(list.get(i).getProj_id())) {
+            if (!db.isDataExists(list.get(i).getProj_id(), MainApp.userName)) {
                 holder.bi.checkMark.setVisibility(View.GONE);
                 holder.bi.totalMarks.setVisibility(View.GONE);
                 holder.bi.projectTitle.setTextColor(Color.parseColor("#000000"));
@@ -86,7 +87,7 @@ public class AllProjectListAdapter extends RecyclerView.Adapter<AllProjectListAd
                 @Override
                 public void onClick(View v) {
 
-                    if (!db.isDataExists(list.get(i).getProj_id())) {
+                    if (!db.isDataExists(list.get(i).getProj_id(), MainApp.userName)) {
                         clickListener.OnItemClick(list.get(i));
                     } else {
                         Toast.makeText(context, "This project has already been scored!", Toast.LENGTH_SHORT).show();
